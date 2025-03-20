@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private Scanner scanner;
     private List<Pizza> menuItems;
     private List<Bestillinger> bestillingsListe;
 
@@ -15,33 +16,40 @@ public class Main {
     public Main() {
         menuItems = new ArrayList<>();
         bestillingsListe = new ArrayList<>();
+        scanner = new Scanner(System.in);
 
         loadMenuItems();
     }
 
-    public void displayMenu() {
-    boolean running = true;
-    Scanner sc = new Scanner(System.in);
-
-    // "showMenu" skal forstille sig at være vores "System-menu"
+    public void run() {
+        boolean running = true;
         while (running) {
-        X.showMenu();
-        int choice = X.choice();
-        // "choice" skal forstille sig at være en metode som tager et tal fra user, som et valg af flere valgmuligheder
+            displayMainMenu();
+            System.out.print("Indtast dit valg: ");
+            int choice = scanner.nextInt();
 
-        // "X" Skal erstattes med funktionernes navne
-        switch (choice) {
-            case 1 -> ();
-            case 2 -> X2();
-            case 3 -> X3();
-            case 4 -> X4();
-            case 5 -> X5();
-            case 6 -> X6();
-            case 9 -> running = false;
-            default -> System.out.println("Dit valg eksistere ikke");
+            switch (choice) {
+                case 1 -> takeOrder(menuItems);
+                case 2 -> X2();
+                case 3 -> X3();
+                case 4 -> X4();
+                case 5 -> X5();
+                case 6 -> X6();
+                case 9 -> running = false;
+                default -> System.out.println("Dit valg eksistere ikke");
+            }
         }
     }
-}
+
+    private void displayMainMenu() {
+        System.out.println("\n===== MARIO'S PIZZABAR =====");
+        System.out.println("1. Opret ny ordre");
+        System.out.println("2. Vis menukort");
+        System.out.println("3. Marker ordre som klar");
+        System.out.println("4. Afslut ordre (afhentet og betalt)");
+        System.out.println("5. Vis statistik");
+        System.out.println("9. Afslut program");
+    }
 
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
