@@ -1,8 +1,7 @@
 //Mo kode starter her grundet github fejl
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.text.SimpleDateFormat;
 
 
 public class Bestillinger {
@@ -12,7 +11,7 @@ public class Bestillinger {
     private double price;
     private int amount;
     private List<Bestillinger> bestillingsListe;
-    private int pickupTime;
+    private Date pickupTime;
     private int orderNumber;
 
     public Bestillinger(String name, int number, double price, int amount) {
@@ -40,7 +39,7 @@ public class Bestillinger {
         return amount;
     }
 
-    public int getPickupTime() {
+    public Date getPickupTime() {
         return pickupTime;
     }
 
@@ -64,7 +63,7 @@ public class Bestillinger {
         this.amount = amount;
     }
 
-    public void setPickupTime(int pickupTime){
+    public void setPickupTime(Date pickupTime){
         this.pickupTime = pickupTime;
     }
 
@@ -102,8 +101,12 @@ public class Bestillinger {
         System.out.println("Hvor mange pizzaer er der i bestillingen?");
         int ammountPizza = scanner.nextInt();
 
-        System.out.println("Enter the pickup time?");
-        int pickupTime = scanner.nextInt();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR_OF_DAY, 1);
+        String defaultTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
+
+        System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
+        String timeInput = scanner.nextLine();
 
         for (int i = 1; ammountPizza > i; i++) {
             System.out.println("Hvilken nr på menukortet er pizza nr. " + i + "?");
