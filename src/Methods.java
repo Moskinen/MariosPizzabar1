@@ -47,7 +47,7 @@ public class Methods {
 
         // Menu skal erstattes af et navn fra pizza opgaven
         // X Skal navngives
-        Menu X = new Menu(new String[]
+        PizzaMenu X = new PizzaMenu(new String[]
                 {"1. Navngiv",
                         "2. Navngiv",
                         "3. Navngiv",
