@@ -84,6 +84,16 @@ public class Bestillinger {
         bestillingsListe.add(bestilling);
     }
 
+    public static void sortTime1() {
+
+
+        // "Integer" skal erstattes med vores rigtige class
+        // "tid" er bare navngivet for nu
+        ArrayList<Integer> tid = new ArrayList<>();
+        Collections.sort(tid);
+        System.out.println(tid);
+    }
+
     public void visBestillinger() {
         if (bestillingsListe.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
@@ -92,8 +102,10 @@ public class Bestillinger {
                 System.out.println(b);
             }
         }
-        Methods.sortTime1();
+        sortTime1();
     }
+
+
 
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
