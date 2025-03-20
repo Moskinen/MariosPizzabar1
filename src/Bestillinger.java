@@ -86,8 +86,8 @@ public class Bestillinger implements Comparable<Bestillinger> {
 
 
     @Override
-    public int compareTo(Date OtherTime) {
-
+    public int compareTo(Bestillinger other) {
+        return this.pickupTime.compareTo(other.pickupTime);
     }
 }
 //Mo kode afslutter her
