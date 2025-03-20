@@ -1,4 +1,4 @@
-public class Menu {
+public class PizzaMenu {
     public static void menuItem() {
         Pizza[] pizza = {
                 new Pizza(1, "Vesuvio:", "Tomatsauce, ost, skinke og oregano", 57),
