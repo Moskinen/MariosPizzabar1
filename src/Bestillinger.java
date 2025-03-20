@@ -73,7 +73,7 @@ public class Bestillinger {
 
     @Override
     public String toString() {
-        return "Bestilling: " + name + " | Nummer: " + number + " | Pris: " + price + " | Antal: " + amount;
+        return "Bestilling: " + name + " | Nummer: " + number + " | Antal: " + amount + " | pris: " + price;
     }
 
     public void bestillingsListe() {
