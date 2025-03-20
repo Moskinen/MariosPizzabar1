@@ -1,16 +1,19 @@
+import java.util.Scanner;
+
 public class Switch {
     public static void switches(){
 
         // Menu skal erstattes af et navn fra pizza opgaven
         // X Skal navngives
-        Menu X = new Menu(new String[]
-                {"1. Navngiv",
-                        "2. Navngiv",
-                        "3. Navngiv",
-                        "4. Navngiv",
-                        "5. Navngiv",
-                        "6. Navngiv",
-                        "9. Quit"
+        Menu X = new Menu("MENU", "Choose option:",
+                new String[]{
+                                "| 1. hej    |",
+                        "| 2. hej        |",
+                        "| 3. hej |",
+                        "| 4. hej           |",
+                        "| 5. hej               |",
+                        "| 6. hej               |",
+                        "| 9. Quit                    |\n"
                 });
 
         boolean running = true;
@@ -24,16 +27,24 @@ public class Switch {
 
             // "X" Skal erstattes med funktionernes navne
             switch (choice) {
-                case 1 -> X();
-                case 2 -> X();
-                case 3 -> X();
-                case 4 -> X();
-                case 5 -> X();
-                case 6 -> X();
+                case 1 -> X1();
+                case 2 -> X2();
+                case 3 -> X3();
+                case 4 -> X4();
+                case 5 -> X5();
+                case 6 -> X6();
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
             }
         }
     }
+
+    private static void X1(){}
+    private static void X2(){}
+    private static void X3(){}
+    private static void X4(){}
+    private static void X5(){}
+    private static void X6(){}
+
 
 }
