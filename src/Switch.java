@@ -1,4 +1,4 @@
-public class switchh {
+public class Switch {
     public static void switches(){
 
         // Menu skal erstattes af et navn fra pizza opgaven
