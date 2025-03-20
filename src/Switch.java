@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Switch {
     public static void switches(){
+        Bestillinger b = new Bestillinger();
 
         // Menu skal erstattes af et navn fra pizza opgaven
         // X Skal navngives
@@ -27,7 +28,7 @@ public class Switch {
 
             // "X" Skal erstattes med funktionernes navne
             switch (choice) {
-                case 1 -> X1();
+                case 1 -> ();
                 case 2 -> X2();
                 case 3 -> X3();
                 case 4 -> X4();

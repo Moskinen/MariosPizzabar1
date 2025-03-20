@@ -4,7 +4,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 
 
-public class Bestillinger {
+public class Bestillinger implements Comparable<Bestillinger> {
 
     private String name;
     private int number;
@@ -84,47 +84,11 @@ public class Bestillinger {
         bestillingsListe.add(bestilling);
     }
 
-    public void visBestillinger() {
-        if (bestillingsListe.isEmpty()) {
-            System.out.println("Ingen aktive bestillinger");
-        } else {
-            for (Bestillinger b : bestillingsListe) {
-                System.out.println(b);
-            }
-        }
-        Methods.sortTime1();
+
+    @Override
+    public int compareTo(Date OtherTime) {
+
     }
-
-    public void takeOrder(List<Pizza> menuItems) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Hvor mange pizzaer er der i bestillingen?");
-        int ammountPizza = scanner.nextInt();
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.HOUR_OF_DAY, 1);
-        String defaultTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
-
-        System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
-        String timeInput = scanner.nextLine();
-
-        for (int i = 1; ammountPizza > i; i++) {
-            System.out.println("Hvilken nr på menukortet er pizza nr. " + i + "?");
-            int pizzaNumber = scanner.nextInt();
-
-            Pizza selectedPizza = null;
-            for (Pizza pizza : menuItems) {
-                if (pizza.getPizNum() == pizzaNumber) {
-                    selectedPizza = pizza;
-                    if (selectedPizza != null) {
-                        int orderNumber = bestillingsListe.size() + 1;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
 }
 //Mo kode afslutter her
 
