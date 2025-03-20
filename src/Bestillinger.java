@@ -72,6 +72,7 @@ public class Bestillinger {
                 System.out.println(b);
             }
         }
+        Methods.sortTime1();
     }
 }
 //Mo kode afslutter her
