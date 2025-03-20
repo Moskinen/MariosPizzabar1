@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Bestillinger {
@@ -11,12 +12,16 @@ public class Bestillinger {
     private double price;
     private int amount;
     private List<Bestillinger> bestillingsListe;
+    private int pickupTime;
+    private int orderNumber;
 
     public Bestillinger(String name, int number, double price, int amount) {
         this.name = name;
         this.number = number;
         this.price = price;
         this.amount = amount;
+        this.pickupTime = pickupTime;
+        this.orderNumber = orderNumber;
     }
 
     public String getName() {
@@ -35,6 +40,14 @@ public class Bestillinger {
         return amount;
     }
 
+    public int getPickupTime() {
+        return pickupTime;
+    }
+
+    public int getOrderNumber(){
+        return orderNumber;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -49,6 +62,14 @@ public class Bestillinger {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void setPickupTime(int pickupTime){
+        this.pickupTime = pickupTime;
+    }
+
+    public void setOrderNumber(int orderNumber){
+        this.orderNumber = orderNumber;
     }
 
     @Override
@@ -74,6 +95,33 @@ public class Bestillinger {
         }
         Methods.sortTime1();
     }
+
+    public void takeOrder(List<Pizza> menuItems) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Hvor mange pizzaer er der i bestillingen?");
+        int ammountPizza = scanner.nextInt();
+
+        System.out.println("Enter the pickup time?");
+        int pickupTime = scanner.nextInt();
+
+        for (int i = 1; ammountPizza > i; i++) {
+            System.out.println("Hvilken nr på menukortet er pizza nr. " + i + "?");
+            int pizzaNumber = scanner.nextInt();
+
+            Pizza selectedPizza = null;
+            for (Pizza pizza : menuItems) {
+                if (pizza.getPizNum() == pizzaNumber) {
+                    selectedPizza = pizza;
+                    if (selectedPizza != null) {
+                        int orderNumber = bestillingsListe.size() + 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 }
 //Mo kode afslutter her
 
