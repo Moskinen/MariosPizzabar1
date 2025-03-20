@@ -7,13 +7,13 @@ public class Switch {
         // X Skal navngives
         Menu X = new Menu("MENU", "Choose option:",
                 new String[]{
-                                "| 1. hej    |",
-                        "| 2. hej        |",
-                        "| 3. hej |",
-                        "| 4. hej           |",
-                        "| 5. hej               |",
-                        "| 6. hej               |",
-                        "| 9. Quit                    |\n"
+                                "| 1. hej",
+                        "| 2. hej",
+                        "| 3. hej",
+                        "| 4. hej",
+                        "| 5. hej",
+                        "| 6. hej",
+                        "| 9. Quit\n"
                 });
 
         boolean running = true;
