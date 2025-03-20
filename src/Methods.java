@@ -34,7 +34,7 @@ public class Methods {
 
             while (!scanner.hasNextInt()) {
                 System.out.print("Indtast det nummer på menukortet som passer til pizzaen");
-                scanner.next();
+                scanner.next(); 
             }
 
             int pizzaOrdered = scanner.nextInt();
