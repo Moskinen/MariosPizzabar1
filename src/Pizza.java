@@ -32,6 +32,6 @@ public class Pizza {
 
     //toString
     public String toString(){
-        return String.format("%-15d%-15s%-15s%-15f", pizzaNumber, pizzaName, pizzaIngredients, price);
+        return String.format("%-10d%-15s%-25s%-15f", pizzaNumber, pizzaName, pizzaIngredients, price);
     }
 }
