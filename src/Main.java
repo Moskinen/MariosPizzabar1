@@ -10,7 +10,8 @@ public class Main {
     private List<Bestillinger> bestillingsListe;
 
     public static void main(String[] args) {
-
+        Main mainProgram = new Main();
+        mainProgram.run();
     }
 
     public Main() {
@@ -30,11 +31,11 @@ public class Main {
 
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
-                case 2 -> X2();
+                /*case 2 -> X2();
                 case 3 -> X3();
                 case 4 -> X4();
                 case 5 -> X5();
-                case 6 -> X6();
+                case 6 -> X6();*/
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
             }
@@ -56,6 +57,8 @@ public class Main {
 
         System.out.println("Hvor mange pizzaer er der i bestillingen?");
         int ammountPizza = scanner.nextInt();
+
+        scanner.nextLine();
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR_OF_DAY, 1);
@@ -89,7 +92,7 @@ public class Main {
                 System.out.println(b);
             }
         }
-        Methods.sortTime1();
+        //Methods.sortTime1();
     }
 
 
