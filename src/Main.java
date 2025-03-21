@@ -90,7 +90,7 @@ public class Main {
 
         Bestillinger bestilling = new Bestillinger (customerName, orderNumber, pickupTime);
         boolean addingPizzaer = true;
-        while (addingPizzaer) {
+        while (addingPizzaer){
             System.out.println("===== PIZZA MENU =====");
             for (Pizza pizza : menuItems) {
                 System.out.println(pizza);
