@@ -54,10 +54,7 @@ public class Main {
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Hvor mange pizzaer er der i bestillingen?");
-        int ammountPizza = scanner.nextInt();
 
-        scanner.nextLine();
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR_OF_DAY, 1);
