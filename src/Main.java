@@ -1,8 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     private Scanner scanner;
@@ -91,7 +88,9 @@ public class Main {
                 System.out.println(b);
             }
         }
-        //Methods.sortTime1();
+        //Sorteringsmetode
+        Collections.sort(bestillingsListe, Comparator.reverseOrder());
+        System.out.println(bestillingsListe);
     }
 
 
