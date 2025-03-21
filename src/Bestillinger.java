@@ -30,6 +30,13 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.number = number;
     }
 
+    public Bestillinger (String name, int orderNumber, Date pickupTime){
+        this.name = name;
+        this.orderNumber = orderNumber;
+        this.pickupTime = pickupTime;
+
+    }
+
     public void addItem(OrderItem bestilling) {
         bestillingsListe.add(bestilling);
     }
