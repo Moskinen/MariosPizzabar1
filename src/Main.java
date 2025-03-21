@@ -54,13 +54,13 @@ public class Main {
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
 
-
+        scanner.nextLine();
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR_OF_DAY, 1);
         String defaultTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
 
-        System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
+        System.out.print("Afhentningstid (HH:mm) [standard om 1 time " + defaultTime + "]: ");
         String timeInput = scanner.nextLine();
 
         if (timeInput.trim().isEmpty()) {
@@ -94,37 +94,38 @@ public class Main {
             System.out.println("===== PIZZA MENU =====");
             for (Pizza pizza : menuItems) {
                 System.out.println(pizza);
-            int pizza1 = 0;
-            System.out.println("Hvilken pizza vil du tilføje: 0-14");
-            int choice = scanner.nextInt();
+            }
+                int pizza1 = 0;
+                System.out.println("Hvilken pizza vil du tilføje: 0-14");
+                int choice = scanner.nextInt();
 
 
-            Pizza selectedPizza = null;
-            for (Pizza pizza : menuItems) {
-                if (pizza.getPizNum() == choice) {
-                    selectedPizza = pizza;
+                Pizza selectedPizza = null;
+                for (Pizza pizza : menuItems) {
+                    if (pizza.getPizNum() == choice) {
+                        selectedPizza = pizza;
+                    }
                 }
+
+                System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
+                int pizzaAmount = scanner.nextInt();
+
+
+                bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
+
+                System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+
+                System.out.println("Vil du tilføje flere pizzaer til ordren?");
+                String morePizza = scanner.nextLine();
+
+                if (morePizza == "yes"){
+                    continue;
+                } else {
+                    break;
+                }
+
             }
-
-            System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
-            int pizzaAmount = scanner.nextInt();
-
-
-            bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
-
-            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
-
-            System.out.println("Vil du tilføje flere pizzaer til ordren?");
-            String morePizza = scanner.nextLine();
-
-            if (morePizza == "yes"){
-                continue;
-            } else {
-                break;
-            }
-
-        }
-}
+    }
 
     public void visBestillinger() {
         Collections.sort(bestillingsListe, Comparator.reverseOrder());
