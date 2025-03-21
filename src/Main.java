@@ -64,6 +64,11 @@ public class Main {
         System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
         String timeInput = scanner.nextLine();
 
+        Date pickupTime;
+        try {
+
+        }
+
         for (int i = 1; ammountPizza >= i; i++) {
             System.out.println("Hvilken nr på menukortet er pizza nr. " + i + "?");
             int pizzaNumber = scanner.nextInt();
