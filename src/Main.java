@@ -31,8 +31,8 @@ public class Main {
 
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
-                /*case 2 -> X2();
-                case 3 -> X3();
+                case 2 -> visBestillinger();
+                /*case 3 -> X3();
                 case 4 -> X4();
                 case 5 -> X5();
                 case 6 -> X6();*/
@@ -75,12 +75,11 @@ public class Main {
             for (Pizza pizza : menuItems) {
                 if (pizza.getPizNum() == pizzaNumber) {
                     selectedPizza = pizza;
-                    if (selectedPizza != null) {
-                        int orderNumber = bestillingsListe.size() + 1;
-                        break;
-                    }
+
                 }
             }
+
+
         }
     }
 
