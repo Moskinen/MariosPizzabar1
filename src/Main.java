@@ -54,13 +54,16 @@ public class Main {
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Hvor mange pizzaer er der i bestillingen?");
+        int ammountPizza = scanner.nextInt();
 
+        scanner.nextLine();
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR_OF_DAY, 1);
         String defaultTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
 
-        System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
+        System.out.print("Afhentningstid (HH:mm) [standard om 1 time " + defaultTime + "]: ");
         String timeInput = scanner.nextLine();
 
         if (timeInput.trim().isEmpty()) {
@@ -85,10 +88,10 @@ public class Main {
             System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
             return;
         }
-        String customerName = "Jonah";
-        int orderNumber = 2;
 
-        Bestillinger bestilling = new Bestillinger (customerName, orderNumber, pickupTime);
+
+
+
         boolean addingPizzaer = true;
         while (addingPizzaer) {
 
@@ -110,19 +113,10 @@ public class Main {
 
             bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
 
-            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
-
-            System.out.println("Vil du tilføje flere pizzaer til ordren?");
-            String morePizza = scanner.nextLine();
-
-            if (morePizza == "yes"){
-                continue;
-            } else {
-                break;
-            }
-
         }
-}
+
+        Bestillinger bestilling = new Bestillinger (new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
+    }
 
     public void visBestillinger() {
         Collections.sort(bestillingsListe, Comparator.reverseOrder());
