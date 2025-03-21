@@ -91,6 +91,7 @@ public class Main {
 
         boolean addingPizzaer = true;
         while (addingPizzaer) {
+            displayMainMenu();
             int pizza1 = 0;
             System.out.println("Hvilken pizza vil du tilføje: 0-14");
             int choice = scanner.nextInt();
@@ -107,7 +108,7 @@ public class Main {
             int pizzaAmount = scanner.nextInt();
 
 
-            bestillingsListe.add(new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
+            Bestillinger.addItem(new OrderItem (selectedPizza, pizzaAmount));
 
         }
 
