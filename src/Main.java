@@ -101,9 +101,11 @@ public class Main {
                 }
             }
 
-            bestillingsListe.add(new Bestillinger (ammountPizza, timeInput, pizzaNumber);
+            bestillingsListe.add(new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
 
         }
+
+        Bestillinger bestilling = new Bestillinger (new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
     }
 
     public void visBestillinger() {
