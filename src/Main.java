@@ -1,5 +1,7 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.io.*;
 
 public class Main {
     private Scanner scanner;
@@ -64,9 +66,27 @@ public class Main {
         System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
         String timeInput = scanner.nextLine();
 
+        if (timeInput.trim().isEmpty()) {
+            timeInput = defaultTime;
+        }
+
         Date pickupTime;
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            pickupTime = sdf.parse(timeInput);
 
+            Calendar pickupCal = Calendar.getInstance();
+            Calendar nowCal = Calendar.getInstance();
+
+            pickupCal.setTime(pickupTime);
+            pickupCal.set(Calendar.YEAR, nowCal.get(Calendar.YEAR));
+            pickupCal.set(Calendar.MONTH, nowCal.get(Calendar.MONTH));
+            pickupCal.set(Calendar.DAY_OF_MONTH, nowCal.get(Calendar.DAY_OF_MONTH));
+
+            pickupTime = pickupCal.getTime();
+        } catch (ParseException e) {
+            System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
+            return;
         }
 
         for (int i = 1; ammountPizza >= i; i++) {
