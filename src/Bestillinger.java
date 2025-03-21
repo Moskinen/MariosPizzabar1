@@ -10,7 +10,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
     private int number;
     private double price;
     private int amount;
-    private List<Bestillinger> bestillingsListe;
+    private List<OrderItem> bestillingsListe;
     private Date pickupTime;
     private int orderNumber;
 

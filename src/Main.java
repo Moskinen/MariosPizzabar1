@@ -86,17 +86,23 @@ public class Main {
             return;
         }
 
-        for (int i = 1; ammountPizza >= i; i++) {
-            System.out.println("Hvilken nr på menukortet er pizza nr. " + i + "?");
-            int pizzaNumber = scanner.nextInt();
+        boolean addingPizzaer = true;
+        while (addingPizzaer) {
+            int pizza1 = 0;
+            System.out.println("Hvilken pizza vil du tilføje: 0-14");
+            int choice = scanner.nextInt();
+
 
             Pizza selectedPizza = null;
             for (Pizza pizza : menuItems) {
-                if (pizza.getPizNum() == pizzaNumber) {
+                if (pizza.getPizNum() == choice) {
                     selectedPizza = pizza;
-
                 }
             }
+
+            System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
+            int pizzaAmount = scanner.nextInt();
+
 
             bestillingsListe.add(new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
 
