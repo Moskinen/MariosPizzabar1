@@ -29,7 +29,6 @@ public class Main {
             displayMainMenu();
             System.out.print("Indtast dit valg: ");
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
                 case 2 -> visBestillinger();
@@ -55,8 +54,13 @@ public class Main {
 
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
-        scanner.nextLine();
+        System.out.println("Hvad er navnet på kunden der bestiller?");
+        String customerName = scanner.nextLine();
+
+        int orderNumber = random.nextInt(100);
+        System.out.println("Dit ordrenummer er: " + orderNumber);
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR_OF_DAY, 1);
@@ -87,8 +91,6 @@ public class Main {
             System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
             return;
         }
-        String customerName = "Jonah";
-        int orderNumber = 2;
 
         Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime);
         boolean addingPizzaer = true;
