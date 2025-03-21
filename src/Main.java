@@ -82,6 +82,8 @@ public class Main {
     }
 
     public void visBestillinger() {
+        Collections.sort(bestillingsListe, Comparator.reverseOrder());
+        System.out.println(bestillingsListe);
         if (bestillingsListe.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
@@ -89,9 +91,6 @@ public class Main {
                 System.out.println(b);
             }
         }
-        //Sorteringsmetode
-        Collections.sort(bestillingsListe, Comparator.reverseOrder());
-        System.out.println(bestillingsListe);
     }
 
 
