@@ -23,6 +23,12 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.orderNumber = orderNumber;
     }
 
+    public Bestillinger(int amount, Date pickupTime, int number){
+        this.amount = amount;
+        this.pickupTime = pickupTime;
+        this.number = number;
+    }
+
     public String getName() {
         return name;
     }
@@ -90,5 +96,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
         return this.pickupTime.compareTo(other.pickupTime);
     }
 }
+
+
 //Mo kode afslutter her
 

@@ -81,6 +81,7 @@ public class Main {
                 }
             }
 
+            bestillingsListe.add(new Bestillinger (ammountPizza, timeInput, pizzaNumber);
 
         }
     }
