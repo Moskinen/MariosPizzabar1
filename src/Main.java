@@ -7,6 +7,7 @@ public class Main {
     private Scanner scanner;
     private List<Pizza> menuItems;
     private List<Bestillinger> bestillingsListe;
+    private List<Bestillinger> activeOrders;
 
     public static void main(String[] args) {
         Main mainProgram = new Main();
@@ -16,6 +17,7 @@ public class Main {
     public Main() {
         menuItems = new ArrayList<>();
         bestillingsListe = new ArrayList<>();
+        activeOrders = new ArrayList<>();
         scanner = new Scanner(System.in);
 
         loadMenuItems();
@@ -88,44 +90,43 @@ public class Main {
         String customerName = "Jonah";
         int orderNumber = 2;
 
-        Bestillinger bestilling = new Bestillinger (customerName, orderNumber, pickupTime);
+        Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime);
         boolean addingPizzaer = true;
         while (addingPizzaer) {
             System.out.println("===== PIZZA MENU =====");
             for (Pizza pizza : menuItems) {
                 System.out.println(pizza);
             }
-                int pizza1 = 0;
-                System.out.println("Hvilken pizza vil du tilføje: 0-14");
-                int choice = scanner.nextInt();
+            int pizza1 = 0;
+            System.out.println("Hvilken pizza vil du tilføje: 0-14");
+            int choice = scanner.nextInt();
 
 
-                Pizza selectedPizza = null;
-                for (Pizza pizza : menuItems) {
-                    if (pizza.getPizNum() == choice) {
-                        selectedPizza = pizza;
-                        break;
-                    }
-                }
-
-                System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
-                int pizzaAmount = scanner.nextInt();
-
-
-                bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
-
-                System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
-
-                System.out.println("Vil du tilføje flere pizzaer til ordren?");
-                String morePizza = scanner.nextLine();
-
-                if (morePizza == "yes"){
-                    continue;
-                } else {
+            Pizza selectedPizza = null;
+            for (Pizza pizza : menuItems) {
+                if (pizza.getPizNum() == choice) {
+                    selectedPizza = pizza;
                     break;
                 }
-
             }
+
+            System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
+            int pizzaAmount = scanner.nextInt();
+
+
+            bestilling.addItem(new OrderItem(selectedPizza, pizzaAmount));
+
+            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+
+            System.out.println("Vil du tilføje flere pizzaer til ordren? (j/n)");
+            String morePizza = scanner.nextLine();
+
+            if (!morePizza.toLowerCase().startsWith("j")) {
+                addingPizzaer = false;
+            }
+        }
+
+        activeOrders.add(bestilling);
     }
 
     public void visBestillinger() {
