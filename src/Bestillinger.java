@@ -21,12 +21,21 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.amount = amount;
         this.pickupTime = pickupTime;
         this.orderNumber = orderNumber;
+        this.bestillingsListe = new ArrayList<>();
     }
 
     public Bestillinger(int amount, Date pickupTime, int number){
         this.amount = amount;
         this.pickupTime = pickupTime;
         this.number = number;
+    }
+
+    public void addItem(OrderItem bestilling) {
+        bestillingsListe.add(bestilling);
+    }
+
+    public List<OrderItem> getBestillingsListe() {
+        return bestillingsListe;
     }
 
     public String getName() {
@@ -85,11 +94,6 @@ public class Bestillinger implements Comparable<Bestillinger> {
     public void bestillingsListe() {
         this.bestillingsListe = new ArrayList<>();
     }
-
-    public void tilføjBestilling(Bestillinger bestilling) {
-        bestillingsListe.add(bestilling);
-    }
-
 
     @Override
     public int compareTo(Bestillinger other) {
