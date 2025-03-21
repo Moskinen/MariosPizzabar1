@@ -104,6 +104,7 @@ public class Main {
                 for (Pizza pizza : menuItems) {
                     if (pizza.getPizNum() == choice) {
                         selectedPizza = pizza;
+                        break;
                     }
                 }
 
