@@ -85,7 +85,10 @@ public class Main {
             System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
             return;
         }
+        String customerName = "Jonah";
+        int orderNumber = 2;
 
+        Bestillinger bestilling = new Bestillinger (customerName, orderNumber, pickupTime);
         boolean addingPizzaer = true;
         while (addingPizzaer) {
             displayMainMenu();
@@ -105,12 +108,21 @@ public class Main {
             int pizzaAmount = scanner.nextInt();
 
 
-            Bestillinger.addItem(new OrderItem (selectedPizza, pizzaAmount));
+            bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
+
+            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+
+            System.out.println("Vil du tilføje flere pizzaer til ordren?");
+            String morePizza = scanner.nextLine();
+
+            if (morePizza == "yes"){
+                continue;
+            } else {
+                break;
+            }
 
         }
-
-        Bestillinger bestilling = new Bestillinger (new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
-    }
+}
 
     public void visBestillinger() {
         Collections.sort(bestillingsListe, Comparator.reverseOrder());
