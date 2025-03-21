@@ -30,8 +30,8 @@ public class Main {
 
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
-                case 2 -> visBestillinger();
-                /*case 3 -> X3();
+                /*case 2 -> visBestillinger();
+                case 3 -> X3();
                 case 4 -> X4();
                 case 5 -> X5();
                 case 6 -> X6();*/
@@ -91,9 +91,7 @@ public class Main {
         Bestillinger bestilling = new Bestillinger (customerName, orderNumber, pickupTime);
         boolean addingPizzaer = true;
         while (addingPizzaer) {
-            System.out.println("===== PIZZA MENU =====");
-            for (Pizza pizza : menuItems) {
-                System.out.println(pizza);
+
             int pizza1 = 0;
             System.out.println("Hvilken pizza vil du tilføje: 0-14");
             int choice = scanner.nextInt();
