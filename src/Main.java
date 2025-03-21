@@ -30,8 +30,8 @@ public class Main {
 
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
-                /*case 2 -> visBestillinger();
-                case 3 -> X3();
+                case 2 -> visBestillinger();
+                /*case 3 -> X3();
                 case 4 -> X4();
                 case 5 -> X5();
                 case 6 -> X6();*/
@@ -88,34 +88,45 @@ public class Main {
             System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
             return;
         }
+        String customerName = "Jonah";
+        int orderNumber = 2;
 
-
-
-
+        Bestillinger bestilling = new Bestillinger (customerName, orderNumber, pickupTime);
         boolean addingPizzaer = true;
         while (addingPizzaer) {
-
-            int pizza1 = 0;
-            System.out.println("Hvilken pizza vil du tilføje: 0-14");
-            int choice = scanner.nextInt();
-
-
-            Pizza selectedPizza = null;
+            System.out.println("===== PIZZA MENU =====");
             for (Pizza pizza : menuItems) {
-                if (pizza.getPizNum() == choice) {
-                    selectedPizza = pizza;
+                System.out.println(pizza);
+                int pizza1 = 0;
+                System.out.println("Hvilken pizza vil du tilføje: 0-14");
+                int choice = scanner.nextInt();
+
+
+                Pizza selectedPizza = null;
+                for (Pizza pizza : menuItems) {
+                    if (pizza.getPizNum() == choice) {
+                        selectedPizza = pizza;
+                    }
                 }
+
+                System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
+                int pizzaAmount = scanner.nextInt();
+
+
+                bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
+
+                System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+
+                System.out.println("Vil du tilføje flere pizzaer til ordren?");
+                String morePizza = scanner.nextLine();
+
+                if (morePizza == "yes"){
+                    continue;
+                } else {
+                    break;
+                }
+
             }
-
-            System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
-            int pizzaAmount = scanner.nextInt();
-
-
-            bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
-
-        }
-
-        Bestillinger bestilling = new Bestillinger (new Bestillinger (ammountPizza, pickupTime, pizzaNumber));
     }
 
     public void visBestillinger() {
