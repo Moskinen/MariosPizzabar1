@@ -63,7 +63,7 @@ public class Main {
         cal.add(Calendar.HOUR_OF_DAY, 1);
         String defaultTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
 
-        System.out.print("Afhentningstid (HH:mm) [standard om 45 Min " + defaultTime + "]: ");
+        System.out.print("Afhentningstid (HH:mm) [standard om 1 time " + defaultTime + "]: ");
         String timeInput = scanner.nextLine();
 
         if (timeInput.trim().isEmpty()) {
@@ -89,6 +89,7 @@ public class Main {
             return;
         }
 
+
         boolean addingPizzaer = true;
         while (addingPizzaer) {
             displayMainMenu();
@@ -108,7 +109,7 @@ public class Main {
             int pizzaAmount = scanner.nextInt();
 
 
-            Bestillinger.addItem(new OrderItem (selectedPizza, pizzaAmount));
+            bestilling.addItem(new OrderItem (selectedPizza, pizzaAmount));
 
         }
 
