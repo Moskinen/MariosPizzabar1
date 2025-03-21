@@ -14,7 +14,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
     private Date pickupTime;
     private int orderNumber;
 
-    public Bestillinger(String name, int number, double price, int amount) {
+    public Bestillinger(String name, int number, double price, int amount, Date pickupTime, int orderNumber) {
         this.name = name;
         this.number = number;
         this.price = price;
