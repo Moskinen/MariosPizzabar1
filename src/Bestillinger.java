@@ -1,5 +1,3 @@
-//Mo kode starter her grundet github fejl
-
 import java.util.*;
 import java.text.SimpleDateFormat;
 
@@ -96,7 +94,10 @@ public class Bestillinger implements Comparable<Bestillinger> {
 
     @Override
     public String toString() {
-        return "Bestilling: " + name + " | Nummer: " + number + " | Antal: " + amount + " | pris: " + price;
+        return "Bestilling: " + name +
+                " | Ordrenummer: " + orderNumber +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Antal: " + amount;
     }
 
     public void bestillingsListe() {

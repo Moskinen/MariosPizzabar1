@@ -48,7 +48,7 @@ public class Main {
     private void displayMainMenu() {
         System.out.println("\n===== MARIO'S PIZZABAR =====");
         System.out.println("1. Opret ny ordre");
-        System.out.println("2. Vis menukort");
+        System.out.println("2. Vis Aktive bestillinger");
         System.out.println("3. Marker ordre som klar");
         System.out.println("4. Afslut ordre (afhentet og betalt)");
         System.out.println("5. Vis statistik");
@@ -96,13 +96,15 @@ public class Main {
         }
 
         Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime);
+
         boolean addingPizzaer = true;
+        int totalAmount = 0;
         while (addingPizzaer) {
             System.out.println("===== PIZZA MENU =====");
             for (Pizza pizza : menuItems) {
                 System.out.println(pizza);
             }
-            int pizza1 = 0;
+
             System.out.println("Hvilken pizza vil du tilføje: 0-14");
             int choice = scanner.nextInt();
 
@@ -118,6 +120,10 @@ public class Main {
             System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
             int pizzaAmount = scanner.nextInt();
             scanner.nextLine();
+
+            totalAmount += pizzaAmount;
+            bestilling.setAmount(totalAmount);
+
 
 
             bestilling.addItem(new OrderItem(selectedPizza, pizzaAmount));
@@ -136,12 +142,12 @@ public class Main {
     }
 
     public void visBestillinger() {
-        Collections.sort(bestillingsListe, Comparator.reverseOrder());
-        System.out.println(bestillingsListe);
-        if (bestillingsListe.isEmpty()) {
+        Collections.sort(activeOrders, Comparator.reverseOrder());
+        System.out.println(activeOrders);
+        if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
-            for (Bestillinger b : bestillingsListe) {
+            for (Bestillinger b : activeOrders) {
                 System.out.println(b);
             }
         }
