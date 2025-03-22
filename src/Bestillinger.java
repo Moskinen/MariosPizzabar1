@@ -1,5 +1,3 @@
-//Mo kode starter her grundet github fejl
-
 import java.util.*;
 import java.text.SimpleDateFormat;
 
@@ -14,15 +12,6 @@ public class Bestillinger implements Comparable<Bestillinger> {
     private Date pickupTime;
     private int orderNumber;
 
-    public Bestillinger(String name, int number, double price, int amount, Date pickupTime, int orderNumber) {
-        this.name = name;
-        this.number = number;
-        this.price = price;
-        this.amount = amount;
-        this.pickupTime = pickupTime;
-        this.orderNumber = orderNumber;
-        this.bestillingsListe = new ArrayList<>();
-    }
 
     public Bestillinger(int amount, Date pickupTime, int number){
         this.amount = amount;
@@ -34,6 +23,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.name = name;
         this.orderNumber = orderNumber;
         this.pickupTime = pickupTime;
+        this.bestillingsListe = new ArrayList<>();
 
     }
 
@@ -95,7 +85,10 @@ public class Bestillinger implements Comparable<Bestillinger> {
 
     @Override
     public String toString() {
-        return "Bestilling: " + name + " | Nummer: " + number + " | Antal: " + amount + " | pris: " + price;
+        return "Bestilling: " + name +
+                " | Ordrenummer: " + orderNumber +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Antal: " + amount;
     }
 
     public void bestillingsListe() {
