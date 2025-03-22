@@ -4,9 +4,11 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    //Scanner for taking the users input
     private Scanner scanner;
+    //List of pizzas on the menu
     private List<Pizza> menuItems;
-    private List<Bestillinger> bestillingsListe;
+    //List of active orders
     private List<Bestillinger> activeOrders;
 
 
@@ -16,9 +18,9 @@ public class Main {
 
     }
 
+    //Constructor
     public Main() {
         menuItems = new ArrayList<>();
-        bestillingsListe = new ArrayList<>();
         activeOrders = new ArrayList<>();
         scanner = new Scanner(System.in);
 
@@ -26,6 +28,7 @@ public class Main {
         loadMenuItems();
     }
 
+    //Method with switch case to run the user menu
     public void run() {
         boolean running = true;
         while (running) {
@@ -45,6 +48,7 @@ public class Main {
         }
     }
 
+    //Printing the user menu
     private void displayMainMenu() {
         System.out.println("\n===== MARIO'S PIZZABAR =====");
         System.out.println("1. Opret ny ordre");
@@ -55,6 +59,7 @@ public class Main {
         System.out.println("9. Afslut program");
     }
 
+    //Method to take orders as input
     public void takeOrder(List<Pizza> menuItems) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
@@ -141,9 +146,9 @@ public class Main {
         activeOrders.add(bestilling);
     }
 
+    //Method to shows orders added in a sorted format based on pickup time
     public void visBestillinger() {
-        Collections.sort(activeOrders, Comparator.reverseOrder());
-        System.out.println(activeOrders);
+        Collections.sort(activeOrders);
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {

@@ -12,15 +12,6 @@ public class Bestillinger implements Comparable<Bestillinger> {
     private Date pickupTime;
     private int orderNumber;
 
-    public Bestillinger(String name, int number, double price, int amount, Date pickupTime, int orderNumber) {
-        this.name = name;
-        this.number = number;
-        this.price = price;
-        this.amount = amount;
-        this.pickupTime = pickupTime;
-        this.orderNumber = orderNumber;
-        this.bestillingsListe = new ArrayList<>();
-    }
 
     public Bestillinger(int amount, Date pickupTime, int number){
         this.amount = amount;
