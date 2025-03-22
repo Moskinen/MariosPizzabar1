@@ -34,6 +34,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.name = name;
         this.orderNumber = orderNumber;
         this.pickupTime = pickupTime;
+        this.bestillingsListe = new ArrayList<>();
 
     }
 

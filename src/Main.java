@@ -9,9 +9,11 @@ public class Main {
     private List<Bestillinger> bestillingsListe;
     private List<Bestillinger> activeOrders;
 
+
     public static void main(String[] args) {
         Main mainProgram = new Main();
         mainProgram.run();
+
     }
 
     public Main() {
@@ -19,6 +21,7 @@ public class Main {
         bestillingsListe = new ArrayList<>();
         activeOrders = new ArrayList<>();
         scanner = new Scanner(System.in);
+
 
         loadMenuItems();
     }
@@ -114,11 +117,12 @@ public class Main {
 
             System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
             int pizzaAmount = scanner.nextInt();
+            scanner.nextLine();
 
 
             bestilling.addItem(new OrderItem(selectedPizza, pizzaAmount));
 
-            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+            System.out.println("<Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
 
             System.out.println("Vil du tilføje flere pizzaer til ordren? (j/n)");
             String morePizza = scanner.nextLine();
