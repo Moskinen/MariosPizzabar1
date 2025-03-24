@@ -1,15 +1,15 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.io.*;
+
 
 public class Main {
     //Scanner for taking the users input
-    private Scanner scanner;
+    private final Scanner scanner;
     //List of pizzas on the menu
-    private List<Pizza> menuItems;
+    private final List<Pizza> menuItems;
     //List of active orders
-    private List<Bestillinger> activeOrders;
+    private final List<Bestillinger> activeOrders;
 
 
     public static void main(String[] args) {
@@ -155,7 +155,7 @@ public class Main {
         } else {
             System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup() == true) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
                 } else {
                     System.out.println(bestilling);
@@ -172,7 +172,7 @@ public class Main {
             System.out.println("Ingen aktive bestillinger");
         } else {
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup() == true) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
                 } else {
                     System.out.println(bestilling);
@@ -198,7 +198,7 @@ public class Main {
             System.out.println("Ingen aktive bestillinger");
         } else {
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup() == true) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
                 } else {
                     System.out.println(bestilling);
