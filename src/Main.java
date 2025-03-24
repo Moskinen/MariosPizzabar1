@@ -155,10 +155,11 @@ public class Main {
         } else {
             System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.readyForPickup == true) {
-                    bestilling.greenToString();
+                if (bestilling.getReadyForPickup() == true) {
+                    System.out.println(bestilling.greenToString());
+                } else {
+                    System.out.println(bestilling);
                 }
-                System.out.println(bestilling);
             }
         }
     }
