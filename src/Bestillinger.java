@@ -11,19 +11,20 @@ public class Bestillinger implements Comparable<Bestillinger> {
     private List<OrderItem> bestillingsListe;
     private Date pickupTime;
     private int orderNumber;
+    public boolean readyForPickup;
 
-
-    public Bestillinger(int amount, Date pickupTime, int number){
+    public Bestillinger(int amount, Date pickupTime, int number) {
         this.amount = amount;
         this.pickupTime = pickupTime;
         this.number = number;
     }
 
-    public Bestillinger (String name, int orderNumber, Date pickupTime){
+    public Bestillinger(String name, int orderNumber, Date pickupTime, boolean readyForPickup) {
         this.name = name;
         this.orderNumber = orderNumber;
         this.pickupTime = pickupTime;
         this.bestillingsListe = new ArrayList<>();
+        this.readyForPickup = readyForPickup;
 
     }
 
@@ -55,8 +56,12 @@ public class Bestillinger implements Comparable<Bestillinger> {
         return pickupTime;
     }
 
-    public int getOrderNumber(){
+    public int getOrderNumber() {
         return orderNumber;
+    }
+
+    public boolean getReadyForPickup() {
+        return readyForPickup;
     }
 
     public void setName(String name) {
@@ -75,12 +80,16 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.amount = amount;
     }
 
-    public void setPickupTime(Date pickupTime){
+    public void setPickupTime(Date pickupTime) {
         this.pickupTime = pickupTime;
     }
 
-    public void setOrderNumber(int orderNumber){
+    public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public void setReadyForPickup(boolean readyForPickup) {
+        this.readyForPickup = readyForPickup;
     }
 
     @Override
@@ -89,6 +98,21 @@ public class Bestillinger implements Comparable<Bestillinger> {
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
                 " | Antal: " + amount;
+    }
+
+    //Green to string method
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public String greenToString() {
+        return ANSI_GREEN +
+                "Bestilling: " + name +
+                " | Ordrenummer: " + orderNumber +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Antal: " + amount +
+                ANSI_RESET;
     }
 
     public void bestillingsListe() {
