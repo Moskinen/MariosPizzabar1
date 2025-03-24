@@ -4,10 +4,13 @@ import java.util.*;
 
 
 public class Main {
+
     //Scanner for taking the users input
     private final Scanner scanner;
+
     //List of pizzas on the menu
     private final List<Pizza> menuItems;
+
     //List of active orders
     private final List<Bestillinger> activeOrders;
 
@@ -23,8 +26,6 @@ public class Main {
         menuItems = new ArrayList<>();
         activeOrders = new ArrayList<>();
         scanner = new Scanner(System.in);
-
-
         loadMenuItems();
     }
 
@@ -70,6 +71,7 @@ public class Main {
         int orderNumber = random.nextInt(100);
         System.out.println("Dit ordrenummer er: " + orderNumber);
 
+        //Method for using Simple Date Format
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR_OF_DAY, 1);
         String defaultTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
@@ -115,7 +117,6 @@ public class Main {
             System.out.println("Hvilken pizza vil du tilføje: 0-14");
             int choice = scanner.nextInt();
 
-
             Pizza selectedPizza = null;
             for (Pizza pizza : menuItems) {
                 if (pizza.getPizNum() == choice) {
@@ -131,7 +132,6 @@ public class Main {
             totalAmount += pizzaAmount;
             bestilling.setAmount(totalAmount);
 
-
             bestilling.addItem(new OrderItem(selectedPizza, pizzaAmount));
 
             System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
@@ -143,7 +143,6 @@ public class Main {
                 addingPizzaer = false;
             }
         }
-
         activeOrders.add(bestilling);
     }
 
@@ -181,7 +180,6 @@ public class Main {
         }
 
         System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
-
         int orderToChange = scanner.nextInt();
 
         for (Bestillinger bestilling : activeOrders)
@@ -207,7 +205,6 @@ public class Main {
         }
 
         System.out.println("Hvilken ordre vil du gerne slette fra listen. Indtast ordrenummeret");
-
         int orderToChange = scanner.nextInt();
 
         for (Bestillinger bestilling : activeOrders)
