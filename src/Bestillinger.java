@@ -13,11 +13,6 @@ public class Bestillinger implements Comparable<Bestillinger> {
     private int orderNumber;
     public boolean readyForPickup;
 
-    public Bestillinger(int amount, Date pickupTime, int number) {
-        this.amount = amount;
-        this.pickupTime = pickupTime;
-        this.number = number;
-    }
 
     public Bestillinger(String name, int orderNumber, Date pickupTime, boolean readyForPickup) {
         this.name = name;
@@ -115,16 +110,10 @@ public class Bestillinger implements Comparable<Bestillinger> {
                 ANSI_RESET;
     }
 
-    public void bestillingsListe() {
-        this.bestillingsListe = new ArrayList<>();
-    }
-
     @Override
     public int compareTo(Bestillinger other) {
         return this.pickupTime.compareTo(other.pickupTime);
     }
 }
 
-
-//Mo kode afslutter her
 

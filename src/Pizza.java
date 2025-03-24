@@ -6,7 +6,7 @@ public class Pizza {
     private double price;
 
     //Constructor
-    public Pizza(int pizzaNumber, String pizzaName, String pizzaIngredients, double price){
+    public Pizza(int pizzaNumber, String pizzaName, String pizzaIngredients, double price) {
         this.pizzaNumber = pizzaNumber;
         this.pizzaName = pizzaName;
         this.pizzaIngredients = pizzaIngredients;
@@ -14,24 +14,24 @@ public class Pizza {
     }
 
     //Getters
-    public int getPizNum(){
+    public int getPizNum() {
         return this.pizzaNumber;
     }
 
-    public String getPizName(){
+    public String getPizName() {
         return this.pizzaName;
     }
 
-    public String getPizIng(){
+    public String getPizIng() {
         return this.pizzaIngredients;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 
     //toString
-    public String toString(){
+    public String toString() {
         return String.format("%-5d%-15s%-65s%.2f\n", pizzaNumber, pizzaName, pizzaIngredients, price);
     }
 }
