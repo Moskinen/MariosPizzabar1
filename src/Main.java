@@ -38,9 +38,9 @@ public class Main {
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
                 case 2 -> visBestillinger();
-                /*case 3 -> X3();
-                case 4 -> X4();
-                case 5 -> X5();
+                case 3 -> ordreStatus();
+                case 4 -> fjernOrdre();
+                /*case 5 -> X5();
                 case 6 -> X6();*/
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
@@ -53,8 +53,8 @@ public class Main {
         System.out.println("\n===== MARIO'S PIZZABAR =====");
         System.out.println("1. Opret ny ordre");
         System.out.println("2. Vis Aktive bestillinger");
-        System.out.println("3. Marker ordre som klar");
-        System.out.println("4. Afslut ordre (afhentet og betalt)");
+        System.out.println("3. Marker ordre som klar til afhentning");
+        System.out.println("4. Fjern ordre efter afhentning");
         System.out.println("5. Vis statistik");
         System.out.println("9. Afslut program");
     }
@@ -100,7 +100,9 @@ public class Main {
             return;
         }
 
-        Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime);
+        boolean readyForPickup = false;
+
+        Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime, readyForPickup);
 
         boolean addingPizzaer = true;
         int totalAmount = 0;
@@ -130,10 +132,9 @@ public class Main {
             bestilling.setAmount(totalAmount);
 
 
-
             bestilling.addItem(new OrderItem(selectedPizza, pizzaAmount));
 
-            System.out.println("<Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
 
             System.out.println("Vil du tilføje flere pizzaer til ordren? (j/n)");
             String morePizza = scanner.nextLine();
@@ -152,10 +153,59 @@ public class Main {
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
+            System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
+            for (Bestillinger bestilling : activeOrders) {
+                if (bestilling.readyForPickup == true) {
+                    bestilling.greenToString();
+                }
+                System.out.println(bestilling);
+            }
+        }
+    }
+
+
+    //Method to remove an order from the active order list
+    public void ordreStatus() {
+        Collections.sort(activeOrders);
+        if (activeOrders.isEmpty()) {
+            System.out.println("Ingen aktive bestillinger");
+        } else {
             for (Bestillinger b : activeOrders) {
                 System.out.println(b);
             }
         }
+
+        System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
+
+        int orderToChange = scanner.nextInt();
+
+        for (Bestillinger bestilling : activeOrders)
+            if (orderToChange == bestilling.getOrderNumber()) {
+                bestilling.setReadyForPickup(true);
+                break;
+            }
+    }
+
+    //Method to remove an order from the active order list
+    public void fjernOrdre() {
+        Collections.sort(activeOrders);
+        if (activeOrders.isEmpty()) {
+            System.out.println("Ingen aktive bestillinger");
+        } else {
+            for (Bestillinger b : activeOrders) {
+                System.out.println(b);
+            }
+        }
+
+        System.out.println("Hvilken ordre vil du gerne slette fra listen. Indtast ordrenummeret");
+
+        int orderToChange = scanner.nextInt();
+
+        for (Bestillinger bestilling : activeOrders)
+            if (orderToChange == bestilling.getOrderNumber()) {
+                activeOrders.remove(bestilling);
+                break;
+            }
     }
 
 
