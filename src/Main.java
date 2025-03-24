@@ -171,8 +171,12 @@ public class Main {
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
-            for (Bestillinger b : activeOrders) {
-                System.out.println(b);
+            for (Bestillinger bestilling : activeOrders) {
+                if (bestilling.getReadyForPickup() == true) {
+                    System.out.println(bestilling.greenToString());
+                } else {
+                    System.out.println(bestilling);
+                }
             }
         }
 
@@ -193,8 +197,12 @@ public class Main {
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
-            for (Bestillinger b : activeOrders) {
-                System.out.println(b);
+            for (Bestillinger bestilling : activeOrders) {
+                if (bestilling.getReadyForPickup() == true) {
+                    System.out.println(bestilling.greenToString());
+                } else {
+                    System.out.println(bestilling);
+                }
             }
         }
 
