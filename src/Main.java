@@ -35,7 +35,14 @@ public class Main {
         while (running) {
             displayMainMenu();
             System.out.print("Indtast dit valg: ");
-            int choice = scanner.nextInt();
+            String input = scanner.nextLine();
+            int choice;
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt valg. Indtast et tal.");
+                continue;
+            }
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
                 case 2 -> visBestillinger();
@@ -47,6 +54,8 @@ public class Main {
                 default -> System.out.println("Dit valg eksistere ikke");
             }
         }
+
+        scanner.close();
     }
 
     //Printing the user menu
@@ -67,7 +76,10 @@ public class Main {
 
         System.out.println("Hvad er navnet på kunden der bestiller?");
         String customerName = scanner.nextLine();
-
+        if (customerName.trim().isEmpty()) {
+            System.out.println("Fejl: Kundenavn er påkrævet.");
+            return;
+        }
         int orderNumber = random.nextInt(100);
         System.out.println("Dit ordrenummer er: " + orderNumber);
 
@@ -99,6 +111,7 @@ public class Main {
             pickupTime = pickupCal.getTime();
         } catch (ParseException e) {
             System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
+            scanner.nextLine();
             return;
         }
 
@@ -174,6 +187,7 @@ public class Main {
                 addingPizzaer = false;
             }
         }
+
         activeOrders.add(bestilling);
     }
 
@@ -203,6 +217,7 @@ public class Main {
         Collections.sort(activeOrders);
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
+            return;
         } else {
             for (Bestillinger bestilling : activeOrders) {
 
@@ -219,9 +234,10 @@ public class Main {
         System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
         int orderToChange;
         try {
-            orderToChange = Integer.parseInt(scanner.nextLine());
+            orderToChange = Integer.parseInt(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
             System.out.println("Fejl: Indtast et gyldigt ordrenummer.");
+            scanner.nextLine();
             return;
         }
 
@@ -237,6 +253,7 @@ public class Main {
         Collections.sort(activeOrders);
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
+            scanner.nextLine();
         } else {
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling == activeOrders.getFirst()) {
@@ -255,6 +272,7 @@ public class Main {
             orderToChange = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Fejl: Indtast et gyldigt ordrenummer.");
+            scanner.nextLine();
             return;
         }
 
