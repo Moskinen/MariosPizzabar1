@@ -107,6 +107,8 @@ public class Main {
         Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime, readyForPickup);
 
         boolean addingPizzaer = true;
+        boolean anyPizzaAdded = false;
+
         int totalAmount = 0;
         while (addingPizzaer) {
             System.out.println("===== PIZZA MENU =====");
@@ -115,30 +117,59 @@ public class Main {
             }
 
             System.out.println("Hvilken pizza vil du tilføje: 0-14");
-            int choice = scanner.nextInt();
+            int pizzaNumber;
+            try {
+                pizzaNumber = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Fejl: Indtast et gyldigt nummer.");
+                continue;
+            }
+
+            if (pizzaNumber == 0) {
+                if (anyPizzaAdded){
+                    addingPizzaer = false;
+                } else {
+                    System.out.println("Mindst en pizza skal tilføjes til ordren");
+                }
+                continue;
+            }
 
             Pizza selectedPizza = null;
             for (Pizza pizza : menuItems) {
-                if (pizza.getPizNum() == choice) {
+                if (pizza.getPizNum() == pizzaNumber) {
                     selectedPizza = pizza;
                     break;
                 }
             }
 
-            System.out.println("Hvor mange af pizza nr " + choice + " vil du tilføje til bestillingen");
-            int pizzaAmount = scanner.nextInt();
-            scanner.nextLine();
+            if (selectedPizza == null) {
+                System.out.println("Fejl: Ugyldigt pizzanummer.");
+                continue;
+            }
 
-            totalAmount += pizzaAmount;
+            System.out.print("Antal: ");
+            int quantity;
+            try {
+                quantity = Integer.parseInt(scanner.nextLine());
+                if (quantity <= 0) {
+                    System.out.println("Fejl: Antal skal være større end 0");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Fejl: Indtast et gyldigt antal.");
+                continue;
+            }
+
+            totalAmount += quantity;
             bestilling.setAmount(totalAmount);
 
-            bestilling.addItem(new OrderItem(selectedPizza, pizzaAmount));
+            bestilling.addItem(new OrderItem(selectedPizza, quantity));
 
-            System.out.println("Du har tilføjet " + pizzaAmount + "stk. Af pizza nummer " + selectedPizza);
+            anyPizzaAdded = true;
 
+            System.out.println("Pizza tilføjet: " + quantity + "x " + selectedPizza.getPizName());
             System.out.println("Vil du tilføje flere pizzaer til ordren? (j/n)");
             String morePizza = scanner.nextLine();
-
             if (!morePizza.toLowerCase().startsWith("j")) {
                 addingPizzaer = false;
             }
@@ -180,7 +211,13 @@ public class Main {
         }
 
         System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
-        int orderToChange = scanner.nextInt();
+        int orderToChange;
+        try {
+            orderToChange = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl: Indtast et gyldigt ordrenummer.");
+            return;
+        }
 
         for (Bestillinger bestilling : activeOrders)
             if (orderToChange == bestilling.getOrderNumber()) {
@@ -205,7 +242,13 @@ public class Main {
         }
 
         System.out.println("Hvilken ordre vil du gerne slette fra listen. Indtast ordrenummeret");
-        int orderToChange = scanner.nextInt();
+        int orderToChange;
+        try {
+            orderToChange = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl: Indtast et gyldigt ordrenummer.");
+            return;
+        }
 
         for (Bestillinger bestilling : activeOrders)
             if (orderToChange == bestilling.getOrderNumber()) {
