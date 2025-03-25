@@ -41,6 +41,7 @@ public class Main {
     public void run() {
         boolean running = true;
         while (running) {
+            clearScreen();
             displayMainMenu();
             System.out.print("Indtast dit valg: ");
             String input = scanner.nextLine();
@@ -79,6 +80,7 @@ public class Main {
 
     //Method to take orders as input
     public void takeOrder(List<Pizza> menuItems) {
+        clearScreen();
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
@@ -198,6 +200,20 @@ public class Main {
 
         activeOrders.add(bestilling);
         orderHistory.add(bestilling);
+
+        clearScreen();
+        System.out.println("===== ORDRE OPRETTET =====");
+        System.out.println("Ordrenummer: #" + bestilling.getOrderNumber());
+        System.out.println("Kunde: " + bestilling.getName());
+        System.out.println("Afhentningstid: " + new SimpleDateFormat ("HH:mm").format(bestilling.getPickupTime()));
+        System.out.println("Pizzaer:");
+        for (OrderItem item: bestilling.getBestillingsListe()) {
+            System.out.println(" " + item.getAmount() + "x #" + item.getPizza().getPizNum() + " " +
+                    item.getPizza().getPizName() + " " + item.getPizza().getPrice() + " kr");
+        }
+        System.out.println("Total: " + bestilling.getTotalPrice() + " kr");
+
+        waitForEnter();
 
         create();
         write();
@@ -364,6 +380,15 @@ public class Main {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+
+    private void waitForEnter() {
+        System.out.println("\nTryk ENTER for at fortsætte...");
+        scanner.nextLine();
     }
 }
 

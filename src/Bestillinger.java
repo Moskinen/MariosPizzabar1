@@ -87,6 +87,14 @@ public class Bestillinger implements Comparable<Bestillinger> {
         this.readyForPickup = readyForPickup;
     }
 
+    public double getTotalPrice() {
+        double total = 0;
+        for (OrderItem item : bestillingsListe) {
+            total += item.getAmount() * item.getPizza().getPrice();
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         return "Bestilling: " + name +
