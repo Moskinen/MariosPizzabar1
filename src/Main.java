@@ -185,7 +185,10 @@ public class Main {
         } else {
             System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup()) {
+
+                if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
+                } else if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
                 } else {
                     System.out.println(bestilling);
@@ -202,7 +205,10 @@ public class Main {
             System.out.println("Ingen aktive bestillinger");
         } else {
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup()) {
+
+                if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
+                } else if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
                 } else {
                     System.out.println(bestilling);
@@ -233,7 +239,9 @@ public class Main {
             System.out.println("Ingen aktive bestillinger");
         } else {
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup()) {
+                if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
+                } else if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
                 } else {
                     System.out.println(bestilling);
