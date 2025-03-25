@@ -310,23 +310,23 @@ public class Main {
     }
 
 
-        public void write () {
-            try {
+    public void write () {
+        try {
 
-                FileWriter myWriter = new FileWriter("Orderhistory.txt");
+            FileWriter myWriter = new FileWriter("Orderhistory.txt");
 
-                // Gennemløb orderHistory og skriv hver bestilling til filen
-                for (Bestillinger bestilling : orderHistory) {
-                    myWriter.write(bestilling.toString() + "\n"); // Skriver hver bestilling med linjeskift
-                }
 
-                myWriter.close();
-                System.out.println( );
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
+            for (Bestillinger bestilling : orderHistory) {
+                myWriter.write(bestilling.toString() + "\n");
             }
+
+            myWriter.close();
+            System.out.println( );
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
+    }
 
     public static void read() {
         try {
