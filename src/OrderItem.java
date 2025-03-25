@@ -1,6 +1,6 @@
 public class OrderItem {
-    private Pizza pizza;
-    private int amount;
+    private final Pizza pizza;
+    private final int amount;
 
     public OrderItem(Pizza pizza, int amount) {
         this.pizza = pizza;

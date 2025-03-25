@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,6 +18,9 @@ public class Main {
     //List of active orders
     private final List<Bestillinger> activeOrders;
 
+    //Order history
+    public final List<Bestillinger> orderHistory;
+
 
     public static void main(String[] args) {
         Main mainProgram = new Main();
@@ -25,6 +32,7 @@ public class Main {
     public Main() {
         menuItems = new ArrayList<>();
         activeOrders = new ArrayList<>();
+        orderHistory = new ArrayList<>();
         scanner = new Scanner(System.in);
         loadMenuItems();
     }
@@ -139,7 +147,7 @@ public class Main {
             }
 
             if (pizzaNumber == 0) {
-                if (anyPizzaAdded){
+                if (anyPizzaAdded) {
                     addingPizzaer = false;
                 } else {
                     System.out.println("Mindst en pizza skal tilføjes til ordren");
@@ -189,6 +197,11 @@ public class Main {
         }
 
         activeOrders.add(bestilling);
+        orderHistory.add(bestilling);
+
+        create();
+        write();
+
     }
 
     //Method to shows orders added in a sorted format based on pickup time
@@ -199,11 +212,10 @@ public class Main {
         } else {
             System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
             for (Bestillinger bestilling : activeOrders) {
-
-                if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else if (bestilling.getReadyForPickup()) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
+                } else if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
@@ -220,11 +232,10 @@ public class Main {
             return;
         } else {
             for (Bestillinger bestilling : activeOrders) {
-
-                if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else if (bestilling.getReadyForPickup()) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
+                } else if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
@@ -256,10 +267,10 @@ public class Main {
             scanner.nextLine();
         } else {
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else if (bestilling.getReadyForPickup()) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
+                } else if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
@@ -281,6 +292,55 @@ public class Main {
                 activeOrders.remove(bestilling);
                 break;
             }
+    }
+
+    public static void create() {
+
+        try {
+            File myObj = new File("Orderhistory.txt");
+            if (myObj.createNewFile()) {
+                System.out.println();
+            } else {
+                System.out.println();
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+
+        public void write () {
+            try {
+
+                FileWriter myWriter = new FileWriter("Orderhistory.txt");
+
+                // Gennemløb orderHistory og skriv hver bestilling til filen
+                for (Bestillinger bestilling : orderHistory) {
+                    myWriter.write(bestilling.toString() + "\n"); // Skriver hver bestilling med linjeskift
+                }
+
+                myWriter.close();
+                System.out.println( );
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        }
+
+    public static void read() {
+        try {
+            File myObj = new File("Orderhistory.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
 
@@ -306,3 +366,4 @@ public class Main {
         System.out.flush();
     }
 }
+
