@@ -1,9 +1,9 @@
 public class Pizza {
     //Attributes
-    private int pizzaNumber;
-    private String pizzaName;
-    private String pizzaIngredients;
-    private double price;
+    private final int pizzaNumber;
+    private final String pizzaName;
+    private final String pizzaIngredients;
+    private final double price;
 
     //Constructor
     public Pizza(int pizzaNumber, String pizzaName, String pizzaIngredients, double price) {

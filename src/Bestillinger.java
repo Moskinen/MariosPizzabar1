@@ -95,7 +95,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
                 " | Antal: " + amount;
     }
 
-    //Green to string method
+
 
     public static final String ANSI_GREEN = "\u001B[32m";
 
@@ -103,6 +103,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
 
     public static final String ANSI_RESET = "\u001B[0m";
 
+    //Green to string method
     public String greenToString() {
         return ANSI_GREEN +
                 "Bestilling: " + name +
@@ -112,6 +113,7 @@ public class Bestillinger implements Comparable<Bestillinger> {
                 ANSI_RESET;
     }
 
+    //Red to string method
     public String redToString() {
         return ANSI_RED +
                 "Bestilling: " + name +

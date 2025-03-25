@@ -139,7 +139,7 @@ public class Main {
             }
 
             if (pizzaNumber == 0) {
-                if (anyPizzaAdded){
+                if (anyPizzaAdded) {
                     addingPizzaer = false;
                 } else {
                     System.out.println("Mindst en pizza skal tilføjes til ordren");
@@ -199,11 +199,10 @@ public class Main {
         } else {
             System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
             for (Bestillinger bestilling : activeOrders) {
-
-                if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else if (bestilling.getReadyForPickup()) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
+                } else if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
@@ -220,11 +219,10 @@ public class Main {
             return;
         } else {
             for (Bestillinger bestilling : activeOrders) {
-
-                if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else if (bestilling.getReadyForPickup()) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
+                } else if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
@@ -256,10 +254,10 @@ public class Main {
             scanner.nextLine();
         } else {
             for (Bestillinger bestilling : activeOrders) {
-                if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else if (bestilling.getReadyForPickup()) {
+                if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
+                } else if (bestilling == activeOrders.getFirst()) {
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
