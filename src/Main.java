@@ -321,7 +321,7 @@ public class Main {
                 }
 
                 myWriter.close();
-                System.out.println();
+                System.out.println( );
             } catch (IOException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
