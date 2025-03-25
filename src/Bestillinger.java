@@ -99,10 +99,21 @@ public class Bestillinger implements Comparable<Bestillinger> {
 
     public static final String ANSI_GREEN = "\u001B[32m";
 
+    public static final String ANSI_RED = "\u001B[31m";
+
     public static final String ANSI_RESET = "\u001B[0m";
 
     public String greenToString() {
         return ANSI_GREEN +
+                "Bestilling: " + name +
+                " | Ordrenummer: " + orderNumber +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Antal: " + amount +
+                ANSI_RESET;
+    }
+
+    public String redToString() {
+        return ANSI_RED +
                 "Bestilling: " + name +
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
