@@ -226,7 +226,8 @@ public class Main {
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
-            System.out.println("Hvis ordren er markeret med grøn er den klar til afhentning");
+            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET + "er den klar til afhentning");
+            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
@@ -247,6 +248,8 @@ public class Main {
             System.out.println("Ingen aktive bestillinger");
             return;
         } else {
+            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET + "er den klar til afhentning");
+            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
@@ -282,6 +285,8 @@ public class Main {
             System.out.println("Ingen aktive bestillinger");
             scanner.nextLine();
         } else {
+            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET + "er den klar til afhentning");
+            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
