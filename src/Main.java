@@ -226,8 +226,8 @@ public class Main {
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
         } else {
-            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET + "er den klar til afhentning");
-            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
+            greenText();
+            redText();
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling.getReadyForPickup()) {
                     System.out.println(bestilling.greenToString());
@@ -244,23 +244,7 @@ public class Main {
 
     //Method to remove an order from the active order list
     public void ordreStatus() {
-        Collections.sort(activeOrders);
-        if (activeOrders.isEmpty()) {
-            System.out.println("Ingen aktive bestillinger");
-            return;
-        } else {
-            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET + "er den klar til afhentning");
-            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
-            for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup()) {
-                    System.out.println(bestilling.greenToString());
-                } else if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else {
-                    System.out.println(bestilling);
-                }
-            }
-        }
+        visBestillinger();
 
         System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
         int orderToChange;
@@ -281,23 +265,7 @@ public class Main {
 
     //Method to remove an order from the active order list
     public void fjernOrdre() {
-        Collections.sort(activeOrders);
-        if (activeOrders.isEmpty()) {
-            System.out.println("Ingen aktive bestillinger");
-            scanner.nextLine();
-        } else {
-            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET + "er den klar til afhentning");
-            System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
-            for (Bestillinger bestilling : activeOrders) {
-                if (bestilling.getReadyForPickup()) {
-                    System.out.println(bestilling.greenToString());
-                } else if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
-                } else {
-                    System.out.println(bestilling);
-                }
-            }
-        }
+        visBestillinger();
 
         System.out.println("Hvilken ordre vil du gerne slette fra listen. Indtast ordrenummeret");
         int orderToChange;
@@ -396,5 +364,16 @@ public class Main {
         System.out.println("\nTryk ENTER for at fortsætte...");
         scanner.nextLine();
     }
+
+    public static void greenText() {
+        System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET +
+                "er den klar til afhentning");
+    }
+
+    public static void redText() {
+        System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
+    }
 }
+
+
 
