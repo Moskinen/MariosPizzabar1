@@ -205,9 +205,9 @@ public class Main {
         System.out.println("===== ORDRE OPRETTET =====");
         System.out.println("Ordrenummer: #" + bestilling.getOrderNumber());
         System.out.println("Kunde: " + bestilling.getName());
-        System.out.println("Afhentningstid: " + new SimpleDateFormat ("HH:mm").format(bestilling.getPickupTime()));
+        System.out.println("Afhentningstid: " + new SimpleDateFormat("HH:mm").format(bestilling.getPickupTime()));
         System.out.println("Pizzaer:");
-        for (OrderItem item: bestilling.getBestillingsListe()) {
+        for (OrderItem item : bestilling.getBestillingsListe()) {
             System.out.println(" " + item.getAmount() + "x #" + item.getPizza().getPizNum() + " " +
                     item.getPizza().getPizName() + " " + item.getPizza().getPrice() + " kr");
         }
@@ -288,10 +288,14 @@ public class Main {
 
         try {
             File myObj = new File("Orderhistory.txt");
-            if (myObj.createNewFile()) {
-                System.out.println();
+            if (myObj.exists()) {
+                System.out.println("Filen eksisterer allerede");
             } else {
-                System.out.println();
+                if (myObj.createNewFile()) {
+                    System.out.println("Filen er blevet oprettet");
+                } else {
+                    System.out.println("Filen kunne ikke blive oprettet");
+                }
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -300,7 +304,7 @@ public class Main {
     }
 
 
-    public void write () {
+    public void write() {
         try {
 
             FileWriter myWriter = new FileWriter("Orderhistory.txt");
@@ -311,7 +315,7 @@ public class Main {
             }
 
             myWriter.close();
-            System.out.println( );
+            System.out.println();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
