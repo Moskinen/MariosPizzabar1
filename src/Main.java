@@ -121,7 +121,7 @@ public class Main {
             pickupTime = pickupCal.getTime();
         } catch (ParseException e) {
             System.out.println("Fejl: Ugyldigt tidsformat. Brug HH:MM");
-            scanner.nextLine();
+            waitForEnter();
             return;
         }
 
@@ -384,8 +384,10 @@ public class Main {
 
         // Show statistics
         System.out.println("Dagens omsætning: " + totalRevenue);
-        System.out.println("Den meste solgte pizza i dag er pizza nr. " + mostPopularPizzaNum +
-                ". Der er blevet solgt " + highestCount + " stk.");
+        System.out.println("Den meste solgte pizza i dag er pizza nr. " + mostPopularPizzaNum + " "
+                + mostPopularPizzaName + ". Der er blevet solgt " + highestCount + " stk.");
+
+        waitForEnter();
     }
 
     private void loadMenuItems() {
