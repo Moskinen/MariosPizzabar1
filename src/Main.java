@@ -59,7 +59,6 @@ public class Main {
                 case 3 -> ordreStatus();
                 case 4 -> fjernOrdre();
                 case 5 -> showStatistics();
-                //case 6 -> X6();*/
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
             }
@@ -382,6 +381,11 @@ public class Main {
                 break;
             }
         }
+
+        // Show statistics
+        System.out.println("Dagens omsætning: " + totalRevenue);
+        System.out.println("Den meste solgte pizza i dag er pizza nr. " + mostPopularPizzaNum +
+                ". Der er blevet solgt " + highestCount + " stk.");
     }
 
     private void loadMenuItems() {
