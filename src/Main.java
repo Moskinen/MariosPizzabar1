@@ -289,10 +289,14 @@ public class Main {
 
         try {
             File myObj = new File("Orderhistory.txt");
-            if (myObj.createNewFile()) {
-                System.out.println();
+            if (myObj.exists()) {
+                System.out.println("Filen eksisterer allerede");
             } else {
-                System.out.println();
+                if (myObj.createNewFile()) {
+                    System.out.println("Filen er blevet oprettet");
+                } else {
+                    System.out.println("Filen kunne ikke blive oprettet");
+                }
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
