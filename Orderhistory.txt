@@ -1,1 +1,2 @@
-Bestilling: f | Ordrenummer: 25 | Afhentningstid: 12:00 | Antal: 1
+Bestilling: r | Ordrenummer: 1 | Afhentningstid: 12:45 | Antal: 1
+Bestilling: fg | Ordrenummer: 83 | Afhentningstid: 12:50 | Antal: 2
