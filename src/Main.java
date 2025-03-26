@@ -215,8 +215,8 @@ public class Main {
 
         waitForEnter();
 
-        create();
-        write();
+        createFile();
+        writeToFile();
 
     }
 
@@ -284,7 +284,7 @@ public class Main {
             }
     }
 
-    public static void create() {
+    public static void createFile() {
 
         try {
             File myObj = new File("Orderhistory.txt");
@@ -300,7 +300,7 @@ public class Main {
     }
 
 
-    public void write () {
+    public void writeToFile () {
         try {
 
             FileWriter myWriter = new FileWriter("Orderhistory.txt");
@@ -318,7 +318,7 @@ public class Main {
         }
     }
 
-    public static void read() {
+    public static void readFile() {
         try {
             File myObj = new File("Orderhistory.txt");
             Scanner myReader = new Scanner(myObj);
