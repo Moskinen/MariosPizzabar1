@@ -5,22 +5,22 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.io.*;
 
 
 public class Main {
 
     //Scanner for taking the users input
-    private final Scanner scanner;
+    private Scanner scanner;
 
     //List of pizzas on the menu
-    private final List<Pizza> menuItems;
+    private List<Pizza> menuItems;
 
     //List of active orders
-    private final List<Bestillinger> activeOrders;
+    private List<Bestillinger> activeOrders;
 
     //Order history
-    public final List<Bestillinger> orderHistory;
-
+    public List<Bestillinger> orderHistory;
 
     public static void main(String[] args) {
         Main mainProgram = new Main();
@@ -35,6 +35,7 @@ public class Main {
         orderHistory = new ArrayList<>();
         scanner = new Scanner(System.in);
         loadMenuItems();
+
     }
 
     //Method with switch case to run the user menu
@@ -57,8 +58,8 @@ public class Main {
                 case 2 -> visBestillinger();
                 case 3 -> ordreStatus();
                 case 4 -> fjernOrdre();
-                /*case 5 -> X5();
-                case 6 -> X6();*/
+                case 5 -> showStatistics();
+                //case 6 -> X6();*/
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
             }
@@ -205,9 +206,9 @@ public class Main {
         System.out.println("===== ORDRE OPRETTET =====");
         System.out.println("Ordrenummer: #" + bestilling.getOrderNumber());
         System.out.println("Kunde: " + bestilling.getName());
-        System.out.println("Afhentningstid: " + new SimpleDateFormat("HH:mm").format(bestilling.getPickupTime()));
+        System.out.println("Afhentningstid: " + new SimpleDateFormat ("HH:mm").format(bestilling.getPickupTime()));
         System.out.println("Pizzaer:");
-        for (OrderItem item : bestilling.getBestillingsListe()) {
+        for (OrderItem item: bestilling.getBestillingsListe()) {
             System.out.println(" " + item.getAmount() + "x #" + item.getPizza().getPizNum() + " " +
                     item.getPizza().getPizName() + " " + item.getPizza().getPrice() + " kr");
         }
@@ -215,8 +216,8 @@ public class Main {
 
         waitForEnter();
 
-        create();
-        write();
+        createFile();
+        writeToFile();
 
     }
 
@@ -284,18 +285,14 @@ public class Main {
             }
     }
 
-    public static void create() {
+    public static void createFile() {
 
         try {
             File myObj = new File("Orderhistory.txt");
-            if (myObj.exists()) {
-                System.out.println("Filen eksisterer allerede");
+            if (myObj.createNewFile()) {
+                System.out.println();
             } else {
-                if (myObj.createNewFile()) {
-                    System.out.println("Filen er blevet oprettet");
-                } else {
-                    System.out.println("Filen kunne ikke blive oprettet");
-                }
+                System.out.println();
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -304,10 +301,10 @@ public class Main {
     }
 
 
-    public void write() {
+    public void writeToFile () {
         try {
 
-            FileWriter myWriter = new FileWriter("Orderhistory.txt");
+            FileWriter myWriter = new FileWriter("Orderhistory.txt", true);
 
 
             for (Bestillinger bestilling : orderHistory) {
@@ -315,14 +312,14 @@ public class Main {
             }
 
             myWriter.close();
-            System.out.println();
+            System.out.println( );
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
 
-    public static void read() {
+    public static void readFile() {
         try {
             File myObj = new File("Orderhistory.txt");
             Scanner myReader = new Scanner(myObj);
@@ -337,6 +334,51 @@ public class Main {
         }
     }
 
+    private void showStatistics() {
+        clearScreen();
+        System.out.println("===== ORDRESTATISTIK =====");
+
+        if (orderHistory.isEmpty()) {
+            System.out.println("Der er ingen afsluttede ordrer at vise statistik for.");
+            waitForEnter();
+            return;
+        }
+
+        // Calculate statistics
+        int totalOrders = orderHistory.size();
+        double totalRevenue = 0;
+        for (Bestillinger bestilling : orderHistory) {
+            totalRevenue += bestilling.getTotalPrice();
+        }
+
+        // Create map of pizza popularity
+        Map<Integer, Integer> pizzaCount = new HashMap<>();
+        for (Bestillinger bestilling : orderHistory) {
+            for (OrderItem item : bestilling.getBestillingsListe()) {
+                int pizzaNum = item.getPizza().getPizNum();
+                pizzaCount.put(pizzaNum, pizzaCount.getOrDefault(pizzaNum, 0) + item.getAmount());
+            }
+        }
+
+        // Find most popular pizza
+        int mostPopularPizzaNum = 0;
+        int highestCount = 0;
+        for (Map.Entry<Integer, Integer> entry : pizzaCount.entrySet()) {
+            if (entry.getValue() > highestCount) {
+                mostPopularPizzaNum = entry.getKey();
+                highestCount = entry.getValue();
+            }
+        }
+
+        // Get pizza name
+        String mostPopularPizzaName = "Ukendt";
+        for (Pizza pizza : menuItems) {
+            if (pizza.getPizNum() == mostPopularPizzaNum) {
+                mostPopularPizzaName = pizza.getPizName();
+                break;
+            }
+        }
+    }
 
     private void loadMenuItems() {
         menuItems.add(new Pizza(1, "Vesuvio:", "Tomatsauce, ost, skinke og oregano", 57));
@@ -353,6 +395,10 @@ public class Main {
         menuItems.add(new Pizza(12, "Le Blissola:", "Tomatsauce, ost, skinke, rejer og oregano", 61));
         menuItems.add(new Pizza(13, "Venezia:", "Tomatsauce, ost, skinke, bacon og oregano", 61));
         menuItems.add(new Pizza(14, "Mafia:", "Tomatsause, ost, pepperoni, bacon, løg, og oregano", 61));
+    }
+
+    private int generateOrderNumber() {
+        return (int) (System.currentTimeMillis() / 1000) % 10000;
     }
 
     public static void clearScreen() {
