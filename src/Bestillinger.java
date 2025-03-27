@@ -70,15 +70,6 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
         return total;
     }
 
-    //To string metode
-    public String toString(Bestillinger bestilling, OrderItem item) {
-        return "Bestilling: " + name +
-                " | Ordrenummer: " + orderNumber +
-                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
-                " | Pizza" + item.getPizza().getPizName() +
-                " | Antal: " + amount;
-    }
-
 
     //Farve metoder
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -87,25 +78,72 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
 
     public static final String ANSI_RESET = "\u001B[0m";
 
-    //Green to string method
-    public String greenToString(Bestillinger bestilling, OrderItem item) {
-        return ANSI_GREEN +
-                "Bestilling: " + name +
-                " | Ordrenummer: " + orderNumber +
-                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
-                " | Antal: " + amount +
-                ANSI_RESET;
+
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Bestilling: ").append(name)
+                .append(" | Ordrenummer: ").append(orderNumber)
+                .append(" | Afhentningstid: ").append(new SimpleDateFormat("HH:mm").format(pickupTime))
+                .append(" | Pizzaer:");
+
+        for (OrderItem item : bestillingsListe) {
+            sb.append("\n  - ")
+                    .append(item.getAmount())
+                    .append("x ")
+                    .append("#")
+                    .append(item.getPizza().getPizNum())
+                    .append(" ")
+                    .append(item.getPizza().getPizName())
+                    .append(" (")
+                    .append(item.getPizza().getPrice())
+                    .append(" kr pr. stk)");
+        }
+
+        sb.append("\n  Total: ").append(getTotalPrice()).append(" kr");
+
+        return sb.toString();
     }
 
-    //Red to string method
-    public String redToString(Bestillinger bestilling, OrderItem item) {
-        return ANSI_RED +
-                "Bestilling: " + bestilling.getName() +
-                " | Ordrenummer: " + bestilling.getOrderNumber() +
-                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(bestilling.getPickupTime()) +
-                " | Pizza" + item.getPizza().getPizName() +
-                " | Antal: " + item.getAmount() +
-                ANSI_RESET;
+    // Simplified green toString method
+    public String greenToString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ANSI_GREEN)
+                .append("Bestilling: ").append(name)
+                .append(" | Ordrenummer: ").append(orderNumber)
+                .append(" | Afhentningstid: ").append(new SimpleDateFormat("HH:mm").format(pickupTime))
+                .append(" | Pizzaer:");
+
+        for (OrderItem item : bestillingsListe) {
+            sb.append("\n  - ")
+                    .append(item.getAmount())
+                    .append("x ")
+                    .append(item.getPizza().getPizName());
+        }
+
+        sb.append(ANSI_RESET);
+        return sb.toString();
+
+    }
+
+    // Simplified red toString method
+    public String redToString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ANSI_RED)
+                .append("Bestilling: ").append(name)
+                .append(" | Ordrenummer: ").append(orderNumber)
+                .append(" | Afhentningstid: ").append(new SimpleDateFormat("HH:mm").format(pickupTime))
+                .append(" | Pizzaer:");
+
+        for (OrderItem item : bestillingsListe) {
+            sb.append("\n  - ")
+                    .append(item.getAmount())
+                    .append("x ")
+                    .append(item.getPizza().getPizName());
+        }
+
+        sb.append(ANSI_RESET);
+        return sb.toString();
     }
 
     //Compare method for pickup time

@@ -25,9 +25,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        OrderItem item = new OrderItem();
         Main mainProgram = new Main();
-        mainProgram.run(item);
+        mainProgram.run();
 
     }
 
@@ -44,7 +43,7 @@ public class Main {
     }
 
     //Method with switch case to run the user menu
-    public void run(OrderItem item) {
+    public void run() {
         boolean running = true;
         while (running) {
             clearScreen();
@@ -62,9 +61,9 @@ public class Main {
             //Method invocation
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
-                case 2 -> visBestillinger(item);
-                case 3 -> ordreStatus(item);
-                case 4 -> fjernOrdre(item);
+                case 2 -> visBestillinger();
+                case 3 -> ordreStatus();
+                case 4 -> fjernOrdre();
                 case 5 -> showStatistics();
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
@@ -234,7 +233,7 @@ public class Main {
     }
 
     //Method to shows orders added in a sorted format based on pickup time
-    public void visBestillinger(OrderItem item) {
+    public void visBestillinger() {
         Collections.sort(activeOrders);
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
@@ -243,9 +242,9 @@ public class Main {
             redText();
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling.getReadyForPickup()) {
-                    System.out.println(bestilling.greenToString(bestilling, item));
+                    System.out.println(bestilling.greenToString());
                 } else if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString(bestilling, item));
+                    System.out.println(bestilling.redToString());
                 } else {
                     System.out.println(bestilling);
                 }
@@ -256,8 +255,8 @@ public class Main {
 
 
     //Method to mark an order for ready for pickup
-    public void ordreStatus(OrderItem item) {
-        visBestillinger(item);
+    public void ordreStatus() {
+        visBestillinger();
 
         System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
         int orderToChange;
@@ -279,8 +278,8 @@ public class Main {
     }
 
     //Method to remove an order from the active order list
-    public void fjernOrdre(OrderItem item) {
-        visBestillinger(item);
+    public void fjernOrdre() {
+        visBestillinger();
 
         System.out.println("Hvilken ordre vil du gerne slette fra listen. Indtast ordrenummeret");
         int orderToChange;
