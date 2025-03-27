@@ -14,6 +14,11 @@ public class OrderItem implements Serializable {
         this.amount = amount;
     }
 
+    public OrderItem(){
+        this.pizza = null;
+        this.amount = 0;
+    }
+
     //Getters
     public Pizza getPizza() {
         return pizza;

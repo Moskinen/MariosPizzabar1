@@ -1,6 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,8 +25,9 @@ public class Main {
 
 
     public static void main(String[] args) {
+        OrderItem item = new OrderItem();
         Main mainProgram = new Main();
-        mainProgram.run();
+        mainProgram.run(item);
 
     }
 
@@ -38,13 +37,14 @@ public class Main {
         activeOrders = new ArrayList<>();
         orderHistory = new ArrayList<>();
         scanner = new Scanner(System.in);
+
         loadCompletedOrders();
         loadMenuItems();
 
     }
 
     //Method with switch case to run the user menu
-    public void run() {
+    public void run(OrderItem item) {
         boolean running = true;
         while (running) {
             clearScreen();
@@ -62,9 +62,9 @@ public class Main {
             //Method invocation
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
-                case 2 -> visBestillinger();
-                case 3 -> ordreStatus();
-                case 4 -> fjernOrdre();
+                case 2 -> visBestillinger(item);
+                case 3 -> ordreStatus(item);
+                case 4 -> fjernOrdre(item);
                 case 5 -> showStatistics();
                 case 9 -> running = false;
                 default -> System.out.println("Dit valg eksistere ikke");
@@ -234,7 +234,7 @@ public class Main {
     }
 
     //Method to shows orders added in a sorted format based on pickup time
-    public void visBestillinger() {
+    public void visBestillinger(OrderItem item) {
         Collections.sort(activeOrders);
         if (activeOrders.isEmpty()) {
             System.out.println("Ingen aktive bestillinger");
@@ -243,9 +243,9 @@ public class Main {
             redText();
             for (Bestillinger bestilling : activeOrders) {
                 if (bestilling.getReadyForPickup()) {
-                    System.out.println(bestilling.greenToString());
+                    System.out.println(bestilling.greenToString(bestilling, item));
                 } else if (bestilling == activeOrders.getFirst()) {
-                    System.out.println(bestilling.redToString());
+                    System.out.println(bestilling.redToString(bestilling, item));
                 } else {
                     System.out.println(bestilling);
                 }
@@ -256,8 +256,8 @@ public class Main {
 
 
     //Method to mark an order for ready for pickup
-    public void ordreStatus() {
-        visBestillinger();
+    public void ordreStatus(OrderItem item) {
+        visBestillinger(item);
 
         System.out.println("Hvilken ordre vil du gerne markere som klar til afhentning. Indtast ordrenummeret");
         int orderToChange;
@@ -279,8 +279,8 @@ public class Main {
     }
 
     //Method to remove an order from the active order list
-    public void fjernOrdre() {
-        visBestillinger();
+    public void fjernOrdre(OrderItem item) {
+        visBestillinger(item);
 
         System.out.println("Hvilken ordre vil du gerne slette fra listen. Indtast ordrenummeret");
         int orderToChange;
@@ -412,13 +412,6 @@ public class Main {
         scanner.nextLine();
     }
 
-    //Farve metoder
-    public static final String ANSI_GREEN = "\u001B[32m";
-
-    public static final String ANSI_RED = "\u001B[31m";
-
-    public static final String ANSI_RESET = "\u001B[0m";
-
     //Method for printing an explanation for why green text is used
     public static void greenText() {
         System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET +
@@ -430,16 +423,7 @@ public class Main {
         System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
     }
 
-    //Red to string method
-    public String redToString(Bestillinger bestilling, OrderItem item) {
-        return ANSI_RED +
-                "Bestilling: " + bestilling.getName() +
-                " | Ordrenummer: " + bestilling.getOrderNumber() +
-                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(bestilling.getPickupTime()) +
-                " | Pizza" + item.getPizza().getPizName() +
-                " | Antal: " + item.getAmount() +
-                ANSI_RESET;
-    }
+
 }
 
 

@@ -71,12 +71,11 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
     }
 
     //To string metode
-    @Override
-    public String toString() {
+    public String toString(Bestillinger bestilling, OrderItem item) {
         return "Bestilling: " + name +
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
-                " | Pizza" + Pizza.getPizName() +
+                " | Pizza" + item.getPizza().getPizName() +
                 " | Antal: " + amount;
     }
 
@@ -89,24 +88,23 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
     public static final String ANSI_RESET = "\u001B[0m";
 
     //Green to string method
-    public String greenToString() {
+    public String greenToString(Bestillinger bestilling, OrderItem item) {
         return ANSI_GREEN +
                 "Bestilling: " + name +
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
-                " | Pizza" + Pizza.getPizName() +
                 " | Antal: " + amount +
                 ANSI_RESET;
     }
 
     //Red to string method
-    public String redToString() {
+    public String redToString(Bestillinger bestilling, OrderItem item) {
         return ANSI_RED +
-                "Bestilling: " + name +
-                " | Ordrenummer: " + orderNumber +
-                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
-                " | Pizza" + Pizza.getPizNum() +
-                " | Antal: " + amount +
+                "Bestilling: " + bestilling.getName() +
+                " | Ordrenummer: " + bestilling.getOrderNumber() +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(bestilling.getPickupTime()) +
+                " | Pizza" + item.getPizza().getPizName() +
+                " | Antal: " + item.getAmount() +
                 ANSI_RESET;
     }
 
