@@ -22,7 +22,9 @@ public class Main {
     //Order history
     public List<Bestillinger> orderHistory;
 
+    //Initialize of order history file
     private final String ORDERS_FILE = "completed_orders.txt";
+
 
     public static void main(String[] args) {
         Main mainProgram = new Main();
@@ -30,12 +32,13 @@ public class Main {
 
     }
 
-    //Constructor
+    //Constructor to initialize data structure
     public Main() {
         menuItems = new ArrayList<>();
         activeOrders = new ArrayList<>();
         orderHistory = new ArrayList<>();
         scanner = new Scanner(System.in);
+        loadCompletedOrders();
         loadMenuItems();
 
     }
@@ -55,6 +58,8 @@ public class Main {
                 System.out.println("Ugyldigt valg. Indtast et tal.");
                 continue;
             }
+
+            //Method invocation
             switch (choice) {
                 case 1 -> takeOrder(menuItems);
                 case 2 -> visBestillinger();
@@ -127,9 +132,11 @@ public class Main {
             return;
         }
 
-        boolean readyForPickup = false;
 
+        boolean readyForPickup = false;
+        //Creating a new instance
         Bestillinger bestilling = new Bestillinger(customerName, orderNumber, pickupTime, readyForPickup);
+
 
         boolean addingPizzaer = true;
         boolean anyPizzaAdded = false;
@@ -144,12 +151,13 @@ public class Main {
             System.out.println("Hvilken pizza vil du tilføje: 0-14");
             int pizzaNumber;
             try {
-                pizzaNumber = Integer.parseInt(scanner.nextLine());
+                pizzaNumber = Integer.parseInt(scanner.nextLine()); //parseInt to avoid leftover input when using nextInt
             } catch (NumberFormatException e) {
                 System.out.println("Fejl: Indtast et gyldigt nummer.");
                 continue;
             }
 
+            //Validation
             if (pizzaNumber == 0) {
                 if (anyPizzaAdded) {
                     addingPizzaer = false;
@@ -159,6 +167,7 @@ public class Main {
                 continue;
             }
 
+            //Finding the selected piza in the menuItems list
             Pizza selectedPizza = null;
             for (Pizza pizza : menuItems) {
                 if (pizza.getPizNum() == pizzaNumber) {
@@ -167,11 +176,13 @@ public class Main {
                 }
             }
 
+            //Validation
             if (selectedPizza == null) {
                 System.out.println("Fejl: Ugyldigt pizzanummer.");
                 continue;
             }
 
+            //User input for amount of pizzas with validation
             System.out.print("Antal: ");
             int quantity;
             try {
@@ -188,21 +199,25 @@ public class Main {
             totalAmount += quantity;
             bestilling.setAmount(totalAmount);
 
+            //Creating an instance of the order
             bestilling.addItem(new OrderItem(selectedPizza, quantity));
 
             anyPizzaAdded = true;
 
+
             System.out.println("Pizza tilføjet: " + quantity + "x " + selectedPizza.getPizName());
-            System.out.println("Vil du tilføje flere pizzaer til ordren? (j/n)");
+            System.out.println("Vil du tilføje flere pizzaer til ordren? (j/n)"); //User input for restarting the loop
             String morePizza = scanner.nextLine();
             if (!morePizza.toLowerCase().startsWith("j")) {
                 addingPizzaer = false;
             }
         }
 
+        //Adding the entire order to two arrays
         activeOrders.add(bestilling);
         orderHistory.add(bestilling);
 
+        //Order confirmation
         clearScreen();
         System.out.println("===== ORDRE OPRETTET =====");
         System.out.println("Ordrenummer: #" + bestilling.getOrderNumber());
@@ -216,10 +231,6 @@ public class Main {
         System.out.println("Total: " + bestilling.getTotalPrice() + " kr");
 
         waitForEnter();
-
-        createFile();
-        writeToFile();
-
     }
 
     //Method to shows orders added in a sorted format based on pickup time
@@ -244,7 +255,7 @@ public class Main {
     }
 
 
-    //Method to remove an order from the active order list
+    //Method to mark an order for ready for pickup
     public void ordreStatus() {
         visBestillinger();
 
@@ -258,11 +269,13 @@ public class Main {
             return;
         }
 
-        for (Bestillinger bestilling : activeOrders)
+        //Enhanced for loop for changing the boolean as ready for pickup
+        for (Bestillinger bestilling : activeOrders) {
             if (orderToChange == bestilling.getOrderNumber()) {
                 bestilling.setReadyForPickup(true);
                 break;
             }
+        }
     }
 
     //Method to remove an order from the active order list
@@ -279,66 +292,17 @@ public class Main {
             return;
         }
 
-        for (Bestillinger bestilling : activeOrders)
+        //Enhanced for loop for looping through active orders and deleting an instance based on the order number
+        for (Bestillinger bestilling : activeOrders) {
             if (orderToChange == bestilling.getOrderNumber()) {
-                activeOrders.remove(bestilling);
+                activeOrders.remove(bestilling); //Removing the order from the array
+                saveCompletedOrders(); //Adding the order to the file
                 break;
             }
-    }
-
-    public static void createFile() {
-
-        try {
-            File myObj = new File("Orderhistory.txt");
-            if (myObj.exists()) {
-                System.out.println("Filen eksisterer allerede");
-            } else {
-                if (myObj.createNewFile()) {
-                    System.out.println("Filen er blevet oprettet");
-                } else {
-                    System.out.println("Filen kunne ikke blive oprettet");
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
     }
 
-
-    public void writeToFile () {
-        try {
-
-            FileWriter myWriter = new FileWriter("Orderhistory.txt", true);
-
-
-            for (Bestillinger bestilling : orderHistory) {
-                myWriter.write(bestilling.toString() + "\n");
-            }
-
-            myWriter.close();
-            System.out.println( );
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    public static void readFile() {
-        try {
-            File myObj = new File("Orderhistory.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                System.out.println(data);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
+    //Method to show statistics for most ordered pizza and total revenue
     private void showStatistics() {
         clearScreen();
         System.out.println("===== ORDRESTATISTIK =====");
@@ -350,7 +314,6 @@ public class Main {
         }
 
         // Calculate statistics
-        int totalOrders = orderHistory.size();
         double totalRevenue = 0;
         for (Bestillinger bestilling : orderHistory) {
             totalRevenue += bestilling.getTotalPrice();
@@ -392,6 +355,7 @@ public class Main {
         waitForEnter();
     }
 
+    //Method for loading the menu items into an arraylist
     private void loadMenuItems() {
         menuItems.add(new Pizza(1, "Vesuvio:", "Tomatsauce, ost, skinke og oregano", 57));
         menuItems.add(new Pizza(2, "Amerikaner:", "Tomatsauce, ost, oksefars og oregano", 53));
@@ -432,6 +396,7 @@ public class Main {
         }
     }
 
+    //Method for clearing the console
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -441,16 +406,19 @@ public class Main {
         }
     }
 
+    //Method to wait on user input before clearing the console
     private void waitForEnter() {
         System.out.println("\nTryk ENTER for at fortsætte...");
         scanner.nextLine();
     }
 
+    //Method for printing an explanation for why green text is used
     public static void greenText() {
         System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET +
                 "er den klar til afhentning");
     }
 
+    //Method for printing an explanation for why red text is used
     public static void redText() {
         System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
     }

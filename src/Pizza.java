@@ -26,10 +26,6 @@ public class Pizza implements Serializable {
         return this.pizzaName;
     }
 
-    public String getPizIng() {
-        return this.pizzaIngredients;
-    }
-
     public double getPrice() {
         return this.price;
     }

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 public class Bestillinger implements Serializable, Comparable<Bestillinger> {
 
+    //Attributes
     private static final long serialVersionUID = 1L;
 
     private String name;
@@ -16,7 +17,7 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
     private int orderNumber;
     public boolean readyForPickup;
 
-
+    //Constructor
     public Bestillinger(String name, int orderNumber, Date pickupTime, boolean readyForPickup) {
         this.name = name;
         this.orderNumber = orderNumber;
@@ -26,28 +27,18 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
 
     }
 
+    //Metode til at tilføje ordre til arraylist
     public void addItem(OrderItem bestilling) {
         bestillingsListe.add(bestilling);
     }
 
+    //Getters
     public List<OrderItem> getBestillingsListe() {
         return bestillingsListe;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     public Date getPickupTime() {
@@ -62,28 +53,9 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
         return readyForPickup;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
+    //Setters
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public void setPickupTime(Date pickupTime) {
-        this.pickupTime = pickupTime;
-    }
-
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
     }
 
     public void setReadyForPickup(boolean readyForPickup) {
@@ -98,16 +70,18 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
         return total;
     }
 
+    //To string metode
     @Override
     public String toString() {
         return "Bestilling: " + name +
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Pizza" + Pizza.getPizName() +
                 " | Antal: " + amount;
     }
 
 
-
+    //Farve metoder
     public static final String ANSI_GREEN = "\u001B[32m";
 
     public static final String ANSI_RED = "\u001B[31m";
@@ -120,6 +94,7 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
                 "Bestilling: " + name +
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Pizza" + Pizza.getPizName() +
                 " | Antal: " + amount +
                 ANSI_RESET;
     }
@@ -130,10 +105,12 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
                 "Bestilling: " + name +
                 " | Ordrenummer: " + orderNumber +
                 " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(pickupTime) +
+                " | Pizza" + Pizza.getPizNum() +
                 " | Antal: " + amount +
                 ANSI_RESET;
     }
 
+    //Compare method for pickup time
     @Override
     public int compareTo(Bestillinger other) {
         return this.pickupTime.compareTo(other.pickupTime);

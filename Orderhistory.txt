@@ -1,2 +1,5 @@
 Bestilling: r | Ordrenummer: 1 | Afhentningstid: 12:45 | Antal: 1
 Bestilling: fg | Ordrenummer: 83 | Afhentningstid: 12:50 | Antal: 2
+Bestilling: Olivia | Ordrenummer: 1 | Afhentningstid: 12:10 | Antal: 100
+Bestilling: Olivia | Ordrenummer: 1 | Afhentningstid: 12:10 | Antal: 100
+Bestilling: Morten | Ordrenummer: 42 | Afhentningstid: 15:00 | Antal: 5
