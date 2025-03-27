@@ -431,13 +431,13 @@ public class Main {
     }
 
     //Red to string method
-    public String redToString() {
+    public String redToString(Bestillinger bestilling, OrderItem item) {
         return ANSI_RED +
-                "Bestilling: " + Bestillinger.getName() +
-                " | Ordrenummer: " + Bestillinger.getOrderNumber() +
-                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(getPickupTime()) +
-                " | Pizza" + pizza.getPizza() +
-                " | Antal: " + Bestillinger.getAmount() +
+                "Bestilling: " + bestilling.getName() +
+                " | Ordrenummer: " + bestilling.getOrderNumber() +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(bestilling.getPickupTime()) +
+                " | Pizza" + item.getPizza().getPizName() +
+                " | Antal: " + item.getAmount() +
                 ANSI_RESET;
     }
 }
