@@ -1,4 +1,9 @@
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private final Pizza pizza;
     private final int amount;
 

@@ -22,6 +22,8 @@ public class Main {
     //Order history
     public List<Bestillinger> orderHistory;
 
+    private final String ORDERS_FILE = "completed_orders.txt";
+
     public static void main(String[] args) {
         Main mainProgram = new Main();
         mainProgram.run();
@@ -407,8 +409,27 @@ public class Main {
         menuItems.add(new Pizza(14, "Mafia:", "Tomatsause, ost, pepperoni, bacon, løg, og oregano", 61));
     }
 
-    private int generateOrderNumber() {
-        return (int) (System.currentTimeMillis() / 1000) % 10000;
+    // Save completed orders to file
+    private void saveCompletedOrders() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ORDERS_FILE))) {
+            oos.writeObject(orderHistory);
+        } catch (IOException e) {
+            System.err.println("Fejl ved gem af ordrer: " + e.getMessage());
+        }
+    }
+
+    // Load completed orders from file
+    @SuppressWarnings("unchecked")
+    private void loadCompletedOrders() {
+        File file = new File(ORDERS_FILE);
+        if (file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                orderHistory = (List<Bestillinger>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Fejl ved indlæsning af ordrer: " + e.getMessage());
+                orderHistory = new ArrayList<>();
+            }
+        }
     }
 
     public static void clearScreen() {

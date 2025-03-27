@@ -1,8 +1,11 @@
+import java.io.Serializable;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
 
-public class Bestillinger implements Comparable<Bestillinger> {
+public class Bestillinger implements Serializable, Comparable<Bestillinger> {
+
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private int number;
