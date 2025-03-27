@@ -412,6 +412,13 @@ public class Main {
         scanner.nextLine();
     }
 
+    //Farve metoder
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public static final String ANSI_RESET = "\u001B[0m";
+
     //Method for printing an explanation for why green text is used
     public static void greenText() {
         System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_GREEN + "grøn " + Bestillinger.ANSI_RESET +
@@ -421,6 +428,17 @@ public class Main {
     //Method for printing an explanation for why red text is used
     public static void redText() {
         System.out.println("Hvis ordren er markeret med " + Bestillinger.ANSI_RED + "rød " + Bestillinger.ANSI_RESET + "er det den næste ordre der skal laves");
+    }
+
+    //Red to string method
+    public String redToString() {
+        return ANSI_RED +
+                "Bestilling: " + Bestillinger.getName() +
+                " | Ordrenummer: " + Bestillinger.getOrderNumber() +
+                " | Afhentningstid: " + new SimpleDateFormat("HH:mm").format(getPickupTime()) +
+                " | Pizza" + pizza.getPizza() +
+                " | Antal: " + Bestillinger.getAmount() +
+                ANSI_RESET;
     }
 }
 
