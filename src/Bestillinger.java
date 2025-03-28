@@ -118,8 +118,16 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
             sb.append("\n  - ")
                     .append(item.getAmount())
                     .append("x ")
-                    .append(item.getPizza().getPizName());
+                    .append("#")
+                    .append(item.getPizza().getPizNum())
+                    .append(" ")
+                    .append(item.getPizza().getPizName())
+                    .append(" (")
+                    .append(item.getPizza().getPrice())
+                    .append(" kr pr. stk)");
         }
+
+        sb.append("\n  Total: ").append(getTotalPrice()).append(" kr");
 
         sb.append(ANSI_RESET);
         return sb.toString();
@@ -139,8 +147,17 @@ public class Bestillinger implements Serializable, Comparable<Bestillinger> {
             sb.append("\n  - ")
                     .append(item.getAmount())
                     .append("x ")
-                    .append(item.getPizza().getPizName());
+                    .append("#")
+                    .append(item.getPizza().getPizNum())
+                    .append(" ")
+                    .append(item.getPizza().getPizName())
+                    .append(" (")
+                    .append(item.getPizza().getPrice())
+                    .append(" kr pr. stk)");
         }
+
+        sb.append("\n  Total: ").append(getTotalPrice()).append(" kr");
+
 
         sb.append(ANSI_RESET);
         return sb.toString();
