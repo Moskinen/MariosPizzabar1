@@ -313,6 +313,7 @@ public class Main {
         }
 
         // Calculate statistics
+        int totalOrders = orderHistory.size();
         double totalRevenue = 0;
         for (Bestillinger bestilling : orderHistory) {
             totalRevenue += bestilling.getTotalPrice();
@@ -347,11 +348,55 @@ public class Main {
         }
 
         // Show statistics
-        System.out.println("Dagens omsætning: " + totalRevenue);
-        System.out.println("Den meste solgte pizza i dag er pizza nr. " + mostPopularPizzaNum + " "
-                + mostPopularPizzaName + ". Der er blevet solgt " + highestCount + " stk.");
+        System.out.println("Antal afsluttede ordrer: " + totalOrders);
+        System.out.println("Total omsætning: " + totalRevenue);
+        System.out.println("Mest populære pizza: #" + mostPopularPizzaNum + " " + mostPopularPizzaName +
+                " (" + highestCount + " stk)");
 
+        System.out.println("\n===== ORDREHISTORIK =====");
+        System.out.println("Nr.\tKunde\t\tPizzaer\t\t\t\tPris");
+        System.out.println("--------------------------------------------------------------------------------");
+
+
+        for(Bestillinger bestilling : orderHistory) {
+            String pizzas = formatOrderPizzas(bestilling);
+            if (pizzas.length() > 25) {
+                pizzas = pizzas.substring(0, 22) + "...";
+            }
+
+            System.out.printf("#%d\t%-15s\t%-25s\t%d kr\n",
+                    bestilling.getOrderNumber(),
+                    truncateString(bestilling.getName(), 15),
+                    pizzas,
+                    (int) bestilling.getTotalPrice()
+            );
+        }
+
+        System.out.println("\n--------------------------------------------------------------------------------");
         waitForEnter();
+    }
+
+    private String formatOrderPizzas(Bestillinger bestilling) {
+        StringBuilder sb = new StringBuilder();
+        for(OrderItem item : bestilling.getBestillingsListe()) {
+            sb.append(item.getAmount())
+                    .append("x #")
+                    .append(item.getPizza().getPizNum())
+                    .append(" ")
+                    .append(item.getPizza().getPizName())
+                    .append(", ");
+        }
+        if (sb.length() > 2) {
+            sb.setLength(sb.length() - 2);
+        }
+        return sb.toString();
+    }
+
+    private String truncateString(String str, int maxLength) {
+        if (str.length() <= maxLength) {
+            return str;
+        }
+        return str.substring(0, maxLength - 3) + "...";
     }
 
     //Method for loading the menu items into an arraylist
